@@ -96,4 +96,33 @@ router.post('/:complaintId', authenticate, upload.array('files', 5), async (req:
   }
 });
 
+// GET /api/uploads/:documentId/download
+router.get('/:documentId/download', authenticate, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const doc = await prisma.complaintDocument.findUnique({
+      where: { id: req.params.documentId as string },
+      include: { complaint: { select: { citizenId: true } } },
+    });
+
+    if (!doc) {
+      throw new AppError(404, 'Document not found');
+    }
+
+    if (req.user!.role === 'citizen' && doc.complaint.citizenId !== req.user!.sub) {
+      throw new AppError(403, 'Access denied');
+    }
+
+    if (!fs.existsSync(doc.filePath)) {
+      throw new AppError(404, 'File not found on server');
+    }
+
+    res.setHeader('Content-Type', doc.mimeType);
+    res.setHeader('Content-Disposition', `inline; filename="${doc.fileName}"`);
+    const fileStream = fs.createReadStream(doc.filePath);
+    fileStream.pipe(res);
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;

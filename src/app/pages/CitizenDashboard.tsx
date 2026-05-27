@@ -55,18 +55,20 @@ export function CitizenDashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [complaintsRes, notifRes] = await Promise.all([
+        const [complaintsRes, allRes, notifRes] = await Promise.all([
           api.get<{ complaints: ComplaintItem[]; pagination: { total: number } }>('complaints?limit=5'),
+          api.get<{ complaints: ComplaintItem[]; pagination: { total: number } }>('complaints?limit=100'),
           api.get<{ notifications: NotificationItem[]; unreadCount: number }>('notifications'),
         ]);
 
         setComplaints(complaintsRes.complaints);
         setNotifications(notifRes.notifications.slice(0, 4));
 
-        const all = complaintsRes.pagination.total;
-        const resolved = complaintsRes.complaints.filter((c) => c.status === 'resolved').length;
-        const pending = complaintsRes.complaints.filter((c) => c.status === 'submitted').length;
-        const active = all - resolved;
+        const all = allRes.complaints;
+        const resolved = all.filter((c) => c.status === 'resolved').length;
+        const rejected = all.filter((c) => c.status === 'rejected').length;
+        const pending = all.filter((c) => c.status === 'submitted').length;
+        const active = all.length - resolved - rejected;
 
         setStats({ active, pending, resolved, urgent: 0 });
       } catch {

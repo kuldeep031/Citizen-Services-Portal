@@ -467,11 +467,11 @@ export function AdminComplaints() {
                   <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-2">Documents ({selectedDetail.documents.length})</p>
                   <div className="space-y-1.5">
                     {selectedDetail.documents.map((doc) => (
-                      <div key={doc.id} className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg">
-                        <FileText className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" aria-hidden="true" />
-                        <span className="text-[12px] text-card-foreground truncate flex-1">{doc.fileName}</span>
+                      <a key={doc.id} href={`${import.meta.env.VITE_API_URL || 'http://localhost:3001/api'}/uploads/${doc.id}/download`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
+                        <FileText className="w-3.5 h-3.5 text-primary flex-shrink-0" aria-hidden="true" />
+                        <span className="text-[12px] text-primary truncate flex-1 underline">{doc.fileName}</span>
                         <span className="text-[11px] text-muted-foreground/60">{(doc.fileSize / 1024).toFixed(0)}KB</span>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
