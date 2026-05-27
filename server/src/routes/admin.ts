@@ -103,7 +103,7 @@ router.get('/officers', authenticate, authorize('admin'), async (req: Request, r
         isActive: officer.isActive,
         totalAssigned: assignments.length,
         resolved,
-        active: assignments.filter((a) => a.unassignedAt === null).length,
+        active: assignments.filter((a) => a.unassignedAt === null && !['resolved', 'rejected'].includes(a.complaint.status)).length,
         createdAt: officer.createdAt,
       };
     });
