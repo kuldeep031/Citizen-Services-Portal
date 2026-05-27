@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
+// Ensure 'process' is available to the TypeScript compiler in environments
+// where @types/node may not be installed.
+declare const process: any;
+
 const prisma = new PrismaClient();
 
 async function main() {
