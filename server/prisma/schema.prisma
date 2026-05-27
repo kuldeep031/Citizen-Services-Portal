@@ -1,0 +1,226 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  citizen
+  officer
+  admin
+}
+
+enum Priority {
+  low
+  medium
+  high
+}
+
+enum ComplaintStatus {
+  submitted
+  under_review
+  in_progress
+  resolved
+  rejected
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         Role     @default(citizen)
+  phone        String?
+  departmentId String?  @map("department_id")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  department          Department?          @relation(fields: [departmentId], references: [id])
+  complaints          Complaint[]          @relation("CitizenComplaints")
+  assignedComplaints  OfficerAssignment[]
+  statusChanges       ComplaintStatusHistory[] @relation("ChangedBy")
+  notifications       Notification[]
+  refreshTokens       RefreshToken[]
+  uploadedDocuments   ComplaintDocument[]
+
+  @@map("users")
+}
+
+model Department {
+  id             String   @id @default(cuid())
+  name           String   @unique
+  code           String   @unique
+  description    String
+  slaDefaultDays Int      @default(14) @map("sla_default_days")
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  users       User[]
+  complaints  Complaint[]
+  slaRecords  SLARecord[]
+
+  @@map("departments")
+}
+
+model Complaint {
+  id           String          @id @default(cuid())
+  ticketId     String          @unique @map("ticket_id")
+  title        String
+  description  String
+  category     String
+  priority     Priority        @default(medium)
+  status       ComplaintStatus @default(submitted)
+  location     String
+  citizenId    String          @map("citizen_id")
+  departmentId String          @map("department_id")
+  contactName  String?         @map("contact_name")
+  contactPhone String?         @map("contact_phone")
+  contactEmail String?         @map("contact_email")
+  resolvedAt   DateTime?       @map("resolved_at")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+
+  citizen       User                    @relation("CitizenComplaints", fields: [citizenId], references: [id])
+  department    Department              @relation(fields: [departmentId], references: [id])
+  statusHistory ComplaintStatusHistory[]
+  documents     ComplaintDocument[]
+  assignments   OfficerAssignment[]
+  slaRecord     SLARecord?
+  receipt       Receipt?
+  notifications Notification[]
+
+  @@index([citizenId])
+  @@index([departmentId])
+  @@index([status])
+  @@index([ticketId])
+  @@map("complaints")
+}
+
+model ComplaintStatusHistory {
+  id          String   @id @default(cuid())
+  complaintId String   @map("complaint_id")
+  fromStatus  String   @map("from_status")
+  toStatus    String   @map("to_status")
+  changedById String   @map("changed_by_id")
+  remarks     String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  complaint Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  changedBy User      @relation("ChangedBy", fields: [changedById], references: [id])
+
+  @@index([complaintId])
+  @@map("complaint_status_history")
+}
+
+model ComplaintDocument {
+  id          String   @id @default(cuid())
+  complaintId String   @map("complaint_id")
+  fileName    String   @map("file_name")
+  filePath    String   @map("file_path")
+  fileSize    Int      @map("file_size")
+  mimeType    String   @map("mime_type")
+  uploadedById String  @map("uploaded_by_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  complaint  Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  uploadedBy User      @relation(fields: [uploadedById], references: [id])
+
+  @@index([complaintId])
+  @@map("complaint_documents")
+}
+
+model SLARecord {
+  id           String    @id @default(cuid())
+  complaintId  String    @unique @map("complaint_id")
+  departmentId String    @map("department_id")
+  deadlineDays Int       @map("deadline_days")
+  startDate    DateTime  @map("start_date")
+  deadlineDate DateTime  @map("deadline_date")
+  isBreached   Boolean   @default(false) @map("is_breached")
+  breachedAt   DateTime? @map("breached_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  complaint  Complaint  @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  department Department @relation(fields: [departmentId], references: [id])
+
+  @@index([departmentId])
+  @@index([isBreached])
+  @@map("sla_records")
+}
+
+model OfficerAssignment {
+  id          String    @id @default(cuid())
+  complaintId String    @map("complaint_id")
+  officerId   String    @map("officer_id")
+  assignedAt  DateTime  @default(now()) @map("assigned_at")
+  unassignedAt DateTime? @map("unassigned_at")
+
+  complaint Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  officer   User      @relation(fields: [officerId], references: [id])
+
+  @@index([complaintId])
+  @@index([officerId])
+  @@map("officer_assignments")
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  title       String
+  message     String
+  type        String   @default("info")
+  isRead      Boolean  @default(false) @map("is_read")
+  complaintId String?  @map("complaint_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  complaint Complaint? @relation(fields: [complaintId], references: [id])
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}
+
+model Receipt {
+  id          String   @id @default(cuid())
+  complaintId String   @unique @map("complaint_id")
+  ticketId    String   @map("ticket_id")
+  generatedAt DateTime @default(now()) @map("generated_at")
+
+  complaint Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+
+  @@map("receipts")
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        String   @default("info")
+  isActive    Boolean  @default(true) @map("is_active")
+  publishedAt DateTime @default(now()) @map("published_at")
+  expiresAt   DateTime? @map("expires_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("announcements")
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  token     String    @unique
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}

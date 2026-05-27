@@ -1,0 +1,52 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node.js (Dependencies)
+node_modules/
+server/node_modules/
+
+# Build outputs (Frontend & Backend)
+dist/
+dist-ssr/
+build/
+server/dist/
+
+# Prisma & Databases
+server/prisma/*.db
+server/prisma/*.db-journal
+
+# Environment variables (NEVER COMMIT THESE)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+server/.env
+
+# User Uploads
+server/uploads/
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Vite
+.vite/
+
+# AI Assistants
+.claude/
+.claude
+.copilot/
+.cursor/
+
+# TypeScript
+*.tsbuildinfo
+server/*.tsbuildinfo
