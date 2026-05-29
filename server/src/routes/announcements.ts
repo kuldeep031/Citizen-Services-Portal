@@ -27,6 +27,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 // GET /api/announcements/public-stats — public portal stats for homepage
 router.get('/public-stats', async (_req: Request, res: Response, next: NextFunction) => {
   try {
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=60');
     const [totalResolved, totalCitizens, departmentCount] = await Promise.all([
       prisma.complaint.count({ where: { status: 'resolved' } }),
       prisma.user.count({ where: { role: 'citizen' } }),

@@ -149,6 +149,7 @@ export function DashboardLayout() {
 
   return (
     <div className="min-h-screen bg-background">
+      <a href="#main-content" className="skip-to-content">Skip to main content</a>
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-[272px] bg-sidebar transform transition-transform duration-200 ease-in-out lg:translate-x-0 ${
@@ -294,7 +295,7 @@ export function DashboardLayout() {
         </header>
 
         {/* Page Content */}
-        <main className="p-4 sm:p-6 lg:p-8" id="main-content">
+        <main className="p-4 sm:p-6 lg:p-8" id="main-content" tabIndex={-1}>
           <Outlet />
         </main>
       </div>

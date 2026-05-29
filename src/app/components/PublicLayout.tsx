@@ -4,6 +4,7 @@ import { LayoutDashboard, LogIn } from 'lucide-react';
 export function PublicLayout() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <a href="#main-content" className="skip-to-content">Skip to main content</a>
       {/* Public Header */}
       <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
@@ -30,7 +31,7 @@ export function PublicLayout() {
       </header>
 
       {/* Page Content */}
-      <main className="flex-1">
+      <main className="flex-1" id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
 
