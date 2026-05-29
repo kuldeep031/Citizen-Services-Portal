@@ -1,0 +1,55 @@
+{
+  "dashboard": {
+    "title": "অফিসার ড্যাশবোর্ড",
+    "description": "নিয়োগকৃত অভিযোগ এবং সেবা অনুরোধ পরিচালনা ও সমাধান করুন।",
+    "totalAssigned": "মোট নিয়োগকৃত",
+    "pendingAction": "পদক্ষেপ মুলতুবি",
+    "inProgress": "চলমান",
+    "resolved": "সমাধান",
+    "slaBreached": "SLA লঙ্ঘন"
+  },
+  "table": {
+    "id": "আইডি",
+    "title": "শিরোনাম",
+    "priority": "অগ্রাধিকার",
+    "status": "স্থিতি",
+    "deadline": "সময়সীমা",
+    "all": "সব",
+    "allPriorities": "সব অগ্রাধিকার",
+    "high": "উচ্চ",
+    "medium": "মাঝারি",
+    "low": "কম",
+    "noComplaints": "এই ফিল্টারে কোনো অভিযোগ পাওয়া যায়নি",
+    "tryDifferent": "অন্য একটি স্থিতি ফিল্টার নির্বাচন করুন"
+  },
+  "detail": {
+    "citizen": "নাগরিক",
+    "department": "বিভাগ",
+    "phone": "ফোন",
+    "email": "ইমেইল",
+    "location": "স্থান",
+    "filedOn": "দাখিলের তারিখ",
+    "deadline": "সময়সীমা",
+    "overdue": "(বিলম্বিত)",
+    "history": "ইতিহাস",
+    "documents": "সংযুক্ত নথিপত্র",
+    "selectComplaint": "বিবরণ দেখতে একটি অভিযোগ নির্বাচন করুন",
+    "selectHint": "বিস্তারিত প্যানেল খুলতে টেবিলের যেকোনো সারিতে ক্লিক করুন"
+  },
+  "update": {
+    "title": "স্থিতি আপডেট করুন",
+    "selectStatus": "নতুন স্থিতি নির্বাচন করুন...",
+    "inProgress": "চলমান",
+    "underReview": "পর্যালোচনাধীন",
+    "resolved": "সমাধান",
+    "rejected": "প্রত্যাখ্যাত",
+    "remarksPlaceholder": "মন্তব্য বা নোট যোগ করুন...",
+    "submit": "আপডেট জমা দিন"
+  },
+  "notifications": {
+    "complaintSubmitted": "অভিযোগ দাখিল হয়েছে",
+    "statusUpdated": "স্থিতি আপডেট",
+    "newAssignment": "নতুন নিয়োগ",
+    "officerAssigned": "অফিসার নিয়োগকৃত"
+  }
+}

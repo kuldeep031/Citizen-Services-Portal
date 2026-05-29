@@ -1,0 +1,55 @@
+{
+  "dashboard": {
+    "title": "Officer Dashboard",
+    "description": "Manage and resolve assigned complaints and service requests.",
+    "totalAssigned": "Total Assigned",
+    "pendingAction": "Pending Action",
+    "inProgress": "In Progress",
+    "resolved": "Resolved",
+    "slaBreached": "SLA Breached"
+  },
+  "table": {
+    "id": "ID",
+    "title": "Title",
+    "priority": "Priority",
+    "status": "Status",
+    "deadline": "Deadline",
+    "all": "All",
+    "allPriorities": "All Priorities",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "noComplaints": "No complaints found for this filter",
+    "tryDifferent": "Try selecting a different status filter"
+  },
+  "detail": {
+    "citizen": "Citizen",
+    "department": "Department",
+    "phone": "Phone",
+    "email": "Email",
+    "location": "Location",
+    "filedOn": "Filed On",
+    "deadline": "Deadline",
+    "overdue": "(Overdue)",
+    "history": "History",
+    "documents": "Attached Documents",
+    "selectComplaint": "Select a complaint to view details",
+    "selectHint": "Click any row in the table to open the detail panel"
+  },
+  "update": {
+    "title": "Update Status",
+    "selectStatus": "Select new status...",
+    "inProgress": "In Progress",
+    "underReview": "Under Review",
+    "resolved": "Resolved",
+    "rejected": "Rejected",
+    "remarksPlaceholder": "Add remarks or notes...",
+    "submit": "Submit Update"
+  },
+  "notifications": {
+    "complaintSubmitted": "Complaint Submitted",
+    "statusUpdated": "Status Updated",
+    "newAssignment": "New Assignment",
+    "officerAssigned": "Officer Assigned"
+  }
+}

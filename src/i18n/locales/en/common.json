@@ -40,5 +40,11 @@
     "en": "English",
     "hi": "हिन्दी",
     "bn": "বাংলা"
+  },
+  "notifications": {
+    "complaintSubmitted": "Complaint Submitted",
+    "statusUpdated": "Status Updated",
+    "newAssignment": "New Assignment",
+    "officerAssigned": "Officer Assigned"
   }
 }

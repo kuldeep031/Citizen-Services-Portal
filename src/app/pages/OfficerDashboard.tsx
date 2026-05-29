@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StatsCard } from '../components/StatsCard';
 import { StatusBadge } from '../components/StatusBadge';
 import { FileText, Clock, CheckCircle, AlertCircle, AlertTriangle, Filter, X, Send, Inbox, Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../lib/api';
 
 interface ComplaintListItem {
@@ -65,6 +66,7 @@ function formatDate(dateStr: string): string {
 }
 
 export function OfficerDashboard() {
+  const { t } = useTranslation('officer');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>('all');
   const [complaints, setComplaints] = useState<ComplaintListItem[]>([]);
@@ -139,17 +141,17 @@ export function OfficerDashboard() {
   };
 
   const filters: { value: StatusFilter; label: string }[] = [
-    { value: 'all', label: 'All' },
-    { value: 'under_review', label: 'Under Review' },
-    { value: 'in_progress', label: 'In Progress' },
-    { value: 'resolved', label: 'Resolved' },
+    { value: 'all', label: t('table.all', { defaultValue: 'All' }) },
+    { value: 'under_review', label: t('update.underReview') },
+    { value: 'in_progress', label: t('update.inProgress') },
+    { value: 'resolved', label: t('update.resolved') },
   ];
 
   const priorityFilters: { value: PriorityFilter; label: string }[] = [
-    { value: 'all', label: 'All Priorities' },
-    { value: 'high', label: 'High' },
-    { value: 'medium', label: 'Medium' },
-    { value: 'low', label: 'Low' },
+    { value: 'all', label: t('table.allPriorities', { defaultValue: 'All Priorities' }) },
+    { value: 'high', label: t('table.high', { defaultValue: 'High' }) },
+    { value: 'medium', label: t('table.medium', { defaultValue: 'Medium' }) },
+    { value: 'low', label: t('table.low', { defaultValue: 'Low' }) },
   ];
 
   if (loading) {
@@ -164,18 +166,18 @@ export function OfficerDashboard() {
     <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold mb-1">Officer Dashboard</h1>
-        <p className="text-[15px] text-muted-foreground">Manage and resolve assigned complaints and service requests.</p>
+        <h1 className="text-xl sm:text-2xl font-bold mb-1">{t('dashboard.title')}</h1>
+        <p className="text-[15px] text-muted-foreground">{t('dashboard.description')}</p>
       </div>
 
       {/* Stats */}
       <section aria-label="Overview statistics">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-          <StatsCard title="Total Assigned" value={stats.total} icon={FileText} color="primary" />
-          <StatsCard title="Pending Action" value={stats.pending} icon={Clock} color="warning" />
-          <StatsCard title="In Progress" value={stats.inProgress} icon={AlertCircle} color="info" />
-          <StatsCard title="Resolved" value={stats.resolved} icon={CheckCircle} color="success" />
-          <StatsCard title="SLA Breached" value={stats.breached} icon={AlertTriangle} color="primary" />
+          <StatsCard title={t('dashboard.totalAssigned')} value={stats.total} icon={FileText} color="primary" />
+          <StatsCard title={t('dashboard.pendingAction')} value={stats.pending} icon={Clock} color="warning" />
+          <StatsCard title={t('dashboard.inProgress')} value={stats.inProgress} icon={AlertCircle} color="info" />
+          <StatsCard title={t('dashboard.resolved')} value={stats.resolved} icon={CheckCircle} color="success" />
+          <StatsCard title={t('dashboard.slaBreached')} value={stats.breached} icon={AlertTriangle} color="primary" />
         </div>
       </section>
 
@@ -224,11 +226,11 @@ export function OfficerDashboard() {
               <table className="w-full">
                 <thead className="bg-muted/50">
                   <tr>
-                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">ID</th>
-                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">Title</th>
-                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden sm:table-cell">Priority</th>
-                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">Status</th>
-                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden md:table-cell">Deadline</th>
+                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('table.id')}</th>
+                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('table.title')}</th>
+                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden sm:table-cell">{t('table.priority')}</th>
+                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('table.status')}</th>
+                    <th scope="col" className="px-4 sm:px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden md:table-cell">{t('table.deadline')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -269,8 +271,8 @@ export function OfficerDashboard() {
             {complaints.length === 0 && (
               <div className="p-10 text-center">
                 <Inbox className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" aria-hidden="true" />
-                <p className="text-sm font-medium text-muted-foreground">No complaints found for this filter</p>
-                <p className="text-[13px] text-muted-foreground/60 mt-1">Try selecting a different status filter</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('table.noComplaints')}</p>
+                <p className="text-[13px] text-muted-foreground/60 mt-1">{t('table.tryDifferent')}</p>
               </div>
             )}
           </div>
@@ -302,34 +304,34 @@ export function OfficerDashboard() {
 
               <dl className="grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Citizen</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.citizen')}</dt>
                   <dd className="font-medium text-card-foreground mt-0.5">{selectedDetail.citizen.name}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Department</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.department')}</dt>
                   <dd className="font-medium text-card-foreground mt-0.5">{selectedDetail.department.name}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Phone</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.phone')}</dt>
                   <dd className="text-card-foreground mt-0.5 text-[13px]">{selectedDetail.citizen.phone || selectedDetail.contactPhone || '—'}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Email</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.email')}</dt>
                   <dd className="text-card-foreground mt-0.5 text-[13px] truncate">{selectedDetail.citizen.email || selectedDetail.contactEmail || '—'}</dd>
                 </div>
                 <div className="col-span-2">
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Location</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.location')}</dt>
                   <dd className="text-card-foreground mt-0.5 text-[13px]">{selectedDetail.location}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Filed On</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.filedOn')}</dt>
                   <dd className="text-card-foreground mt-0.5 tabular-nums">{formatDate(selectedDetail.createdAt)}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Deadline</dt>
+                  <dt className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('detail.deadline')}</dt>
                   <dd className={`mt-0.5 tabular-nums ${selectedDetail.slaRecord?.isBreached ? 'text-destructive font-semibold' : 'text-card-foreground'}`}>
                     {selectedDetail.slaRecord ? formatDate(selectedDetail.slaRecord.deadlineDate) : '—'}
-                    {selectedDetail.slaRecord?.isBreached && ' (Overdue)'}
+                    {selectedDetail.slaRecord?.isBreached && ` ${t('detail.overdue')}`}
                   </dd>
                 </div>
               </dl>
@@ -337,7 +339,7 @@ export function OfficerDashboard() {
               {/* Status History */}
               {selectedDetail.statusHistory && selectedDetail.statusHistory.length > 0 && (
                 <div>
-                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-2">History</p>
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-2">{t('detail.history')}</p>
                   <div className="space-y-2 max-h-[160px] overflow-y-auto">
                     {selectedDetail.statusHistory.map((h, i) => (
                       <div key={i} className="flex items-start gap-2 p-2 bg-muted/30 rounded-lg">
@@ -357,7 +359,7 @@ export function OfficerDashboard() {
               {/* Documents */}
               {selectedDetail.documents.length > 0 && (
                 <div>
-                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-2">Attached Documents</p>
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-2">{t('detail.documents')}</p>
                   <div className="space-y-1.5">
                     {selectedDetail.documents.map((doc) => (
                       <a key={doc.id} href={`${import.meta.env.VITE_API_URL || 'http://localhost:3001/api'}/uploads/${doc.id}/download`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2.5 bg-muted/40 rounded-lg hover:bg-muted/60 transition-colors">
@@ -376,7 +378,7 @@ export function OfficerDashboard() {
                   onSubmit={(e) => { e.preventDefault(); handleSubmitUpdate(); }}
                   aria-label="Update complaint status"
                 >
-                  <p className="text-sm font-semibold text-card-foreground">Update Status</p>
+                  <p className="text-sm font-semibold text-card-foreground">{t('update.title')}</p>
                   <div>
                     <label htmlFor="status-select" className="sr-only">New status</label>
                     <select
@@ -385,11 +387,11 @@ export function OfficerDashboard() {
                       onChange={(e) => setUpdateStatus(e.target.value)}
                       className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                     >
-                      <option value="">Select new status...</option>
-                      <option value="in_progress">In Progress</option>
-                      <option value="under_review">Under Review</option>
-                      <option value="resolved">Resolved</option>
-                      <option value="rejected">Rejected</option>
+                      <option value="">{t('update.selectStatus')}</option>
+                      <option value="in_progress">{t('update.inProgress')}</option>
+                      <option value="under_review">{t('update.underReview')}</option>
+                      <option value="resolved">{t('update.resolved')}</option>
+                      <option value="rejected">{t('update.rejected')}</option>
                     </select>
                   </div>
                   <div>
@@ -398,7 +400,7 @@ export function OfficerDashboard() {
                       id="remarks-input"
                       value={remarks}
                       onChange={(e) => setRemarks(e.target.value)}
-                      placeholder="Add remarks or notes..."
+                      placeholder={t('update.remarksPlaceholder')}
                       rows={3}
                       className="w-full px-3 py-2.5 rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none"
                     />
@@ -409,7 +411,7 @@ export function OfficerDashboard() {
                     className="flex items-center gap-2 w-full justify-center min-h-[44px] px-4 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     {updating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" aria-hidden="true" />}
-                    Submit Update
+                    {t('update.submit')}
                   </button>
                 </form>
               )}
@@ -417,8 +419,8 @@ export function OfficerDashboard() {
           ) : (
             <div className="bg-card rounded-xl shadow-sm border border-border p-10 text-center sticky top-20">
               <FileText className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" aria-hidden="true" />
-              <p className="text-sm font-medium text-muted-foreground">Select a complaint to view details</p>
-              <p className="text-[13px] text-muted-foreground/60 mt-1">Click any row in the table to open the detail panel</p>
+              <p className="text-sm font-medium text-muted-foreground">{t('detail.selectComplaint')}</p>
+              <p className="text-[13px] text-muted-foreground/60 mt-1">{t('detail.selectHint')}</p>
             </div>
           )}
         </aside>

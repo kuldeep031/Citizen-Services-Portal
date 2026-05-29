@@ -1,0 +1,55 @@
+{
+  "dashboard": {
+    "title": "अधिकारी डैशबोर्ड",
+    "description": "नियुक्त शिकायतों और सेवा अनुरोधों का प्रबंधन और समाधान करें।",
+    "totalAssigned": "कुल नियुक्त",
+    "pendingAction": "कार्रवाई लंबित",
+    "inProgress": "प्रगति में",
+    "resolved": "समाधान",
+    "slaBreached": "SLA उल्लंघन"
+  },
+  "table": {
+    "id": "आईडी",
+    "title": "शीर्षक",
+    "priority": "प्राथमिकता",
+    "status": "स्थिति",
+    "deadline": "समय सीमा",
+    "all": "सभी",
+    "allPriorities": "सभी प्राथमिकताएं",
+    "high": "उच्च",
+    "medium": "मध्यम",
+    "low": "कम",
+    "noComplaints": "इस फ़िल्टर के लिए कोई शिकायत नहीं मिली",
+    "tryDifferent": "कोई अन्य स्थिति फ़िल्टर चुनें"
+  },
+  "detail": {
+    "citizen": "नागरिक",
+    "department": "विभाग",
+    "phone": "फोन",
+    "email": "ईमेल",
+    "location": "स्थान",
+    "filedOn": "दर्ज तिथि",
+    "deadline": "समय सीमा",
+    "overdue": "(विलंबित)",
+    "history": "इतिहास",
+    "documents": "संलग्न दस्तावेज़",
+    "selectComplaint": "विवरण देखने के लिए शिकायत चुनें",
+    "selectHint": "विवरण पैनल खोलने के लिए तालिका में किसी पंक्ति पर क्लिक करें"
+  },
+  "update": {
+    "title": "स्थिति अपडेट करें",
+    "selectStatus": "नई स्थिति चुनें...",
+    "inProgress": "प्रगति में",
+    "underReview": "समीक्षाधीन",
+    "resolved": "समाधान",
+    "rejected": "अस्वीकृत",
+    "remarksPlaceholder": "टिप्पणी या नोट जोड़ें...",
+    "submit": "अपडेट जमा करें"
+  },
+  "notifications": {
+    "complaintSubmitted": "शिकायत दर्ज हुई",
+    "statusUpdated": "स्थिति अपडेट",
+    "newAssignment": "नई नियुक्ति",
+    "officerAssigned": "अधिकारी नियुक्त"
+  }
+}

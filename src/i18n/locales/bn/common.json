@@ -40,5 +40,11 @@
     "en": "English",
     "hi": "हिन्दी",
     "bn": "বাংলা"
+  },
+  "notifications": {
+    "complaintSubmitted": "অভিযোগ দাখিল হয়েছে",
+    "statusUpdated": "স্থিতি আপডেট",
+    "newAssignment": "নতুন নিয়োগ",
+    "officerAssigned": "অফিসার নিয়োগকৃত"
   }
 }

@@ -267,7 +267,13 @@ export function DashboardLayout() {
                             <div className="flex items-start gap-2">
                               <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!n.isRead ? 'bg-primary' : 'bg-transparent'}`} />
                               <div className="flex-1 min-w-0">
-                                <p className="text-[13px] font-medium text-card-foreground">{n.title}</p>
+                                <p className="text-[13px] font-medium text-card-foreground">{
+                                  n.title === 'Complaint Submitted' ? t('notifications.complaintSubmitted') :
+                                  n.title === 'Status Updated' ? t('notifications.statusUpdated') :
+                                  n.title === 'New Assignment' ? t('notifications.newAssignment') :
+                                  n.title === 'Officer Assigned' ? t('notifications.officerAssigned') :
+                                  n.title
+                                }</p>
                                 <p className="text-[12px] text-muted-foreground mt-0.5 line-clamp-2">{n.message}</p>
                                 <time className="text-[11px] text-muted-foreground/60 mt-1 block">
                                   {new Date(n.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
