@@ -129,6 +129,7 @@
   },
   "categories": {
     "ELEC": {
+      "name": "बिजली विभाग",
       "new_connection": "नया कनेक्शन",
       "disconnection": "विच्छेदन",
       "billing_issue": "बिलिंग समस्या",
@@ -137,6 +138,7 @@
       "meter_fault": "मीटर खराबी"
     },
     "WATER": {
+      "name": "जल आपूर्ति विभाग",
       "new_connection": "नया कनेक्शन",
       "low_pressure": "कम दबाव",
       "contamination": "दूषण",
@@ -145,6 +147,7 @@
       "no_supply": "आपूर्ति नहीं"
     },
     "GAS": {
+      "name": "गैस सेवा विभाग",
       "new_connection": "नया कनेक्शन",
       "gas_leak": "गैस रिसाव",
       "meter_issue": "मीटर समस्या",
@@ -153,6 +156,7 @@
       "safety_concern": "सुरक्षा चिंता"
     },
     "WASTE": {
+      "name": "कचरा प्रबंधन विभाग",
       "missed_collection": "छूटा संग्रहण",
       "illegal_dumping": "अवैध डंपिंग",
       "bin_replacement": "बिन बदलना",
@@ -160,6 +164,7 @@
       "hazardous_waste": "खतरनाक कचरा"
     },
     "MUNI": {
+      "name": "नगर निगम",
       "road_repair": "सड़क मरम्मत",
       "drainage_block": "नाली अवरोध",
       "footpath_damage": "फुटपाथ क्षति",

@@ -129,6 +129,7 @@
   },
   "categories": {
     "ELEC": {
+      "name": "বিদ্যুৎ বিভাগ",
       "new_connection": "নতুন সংযোগ",
       "disconnection": "সংযোগ বিচ্ছিন্ন",
       "billing_issue": "বিলিং সমস্যা",
@@ -137,6 +138,7 @@
       "meter_fault": "মিটার ত্রুটি"
     },
     "WATER": {
+      "name": "জল সরবরাহ বিভাগ",
       "new_connection": "নতুন সংযোগ",
       "low_pressure": "কম চাপ",
       "contamination": "দূষণ",
@@ -145,6 +147,7 @@
       "no_supply": "সরবরাহ নেই"
     },
     "GAS": {
+      "name": "গ্যাস সেবা বিভাগ",
       "new_connection": "নতুন সংযোগ",
       "gas_leak": "গ্যাস লিক",
       "meter_issue": "মিটার সমস্যা",
@@ -153,6 +156,7 @@
       "safety_concern": "নিরাপত্তা উদ্বেগ"
     },
     "WASTE": {
+      "name": "বর্জ্য ব্যবস্থাপনা বিভাগ",
       "missed_collection": "সংগ্রহ বাদ পড়েছে",
       "illegal_dumping": "অবৈধ ডাম্পিং",
       "bin_replacement": "বিন প্রতিস্থাপন",
@@ -160,6 +164,7 @@
       "hazardous_waste": "বিপজ্জনক বর্জ্য"
     },
     "MUNI": {
+      "name": "পৌর কর্পোরেশন",
       "road_repair": "রাস্তা মেরামত",
       "drainage_block": "নিষ্কাশন অবরোধ",
       "footpath_damage": "ফুটপাত ক্ষতি",

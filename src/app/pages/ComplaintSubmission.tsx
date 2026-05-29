@@ -215,22 +215,27 @@ export function ComplaintSubmission() {
             <div>
               <h3 className="font-semibold mb-4">{t('submit.selectDepartment')}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {departments.map((dept) => (
-                  <button
-                    key={dept.id}
-                    type="button"
-                    onClick={() => { updateField('departmentId', dept.id); updateField('departmentCode', dept.code); updateField('category', ''); }}
-                    aria-pressed={formData.departmentId === dept.id}
-                    className={`p-4 rounded-xl border-2 text-left transition-all min-h-[44px] ${
-                      formData.departmentId === dept.id
-                        ? 'border-primary bg-primary/5 ring-1 ring-primary/20'
-                        : 'border-border hover:border-primary/30 hover:bg-muted/30'
-                    }`}
-                  >
-                    <p className="text-sm font-semibold text-card-foreground">{dept.name}</p>
-                    <p className="text-[13px] text-muted-foreground mt-0.5">{dept.description}</p>
-                  </button>
-                ))}
+                {departments.map((dept) => {
+                  const translatedName = t(`categories.${dept.code}.name`, { defaultValue: '' });
+                  return (
+                    <button
+                      key={dept.id}
+                      type="button"
+                      onClick={() => { updateField('departmentId', dept.id); updateField('departmentCode', dept.code); updateField('category', ''); }}
+                      aria-pressed={formData.departmentId === dept.id}
+                      className={`p-4 rounded-xl border-2 text-left transition-all min-h-[44px] ${
+                        formData.departmentId === dept.id
+                          ? 'border-primary bg-primary/5 ring-1 ring-primary/20'
+                          : 'border-border hover:border-primary/30 hover:bg-muted/30'
+                      }`}
+                    >
+                      <p className="text-sm font-semibold text-card-foreground">
+                        {translatedName || dept.name}
+                      </p>
+                      <p className="text-[13px] text-muted-foreground mt-0.5">{dept.description}</p>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 

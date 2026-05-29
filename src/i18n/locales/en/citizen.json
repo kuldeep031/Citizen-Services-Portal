@@ -129,6 +129,7 @@
   },
   "categories": {
     "ELEC": {
+      "name": "Electricity Department",
       "new_connection": "New Connection",
       "disconnection": "Disconnection",
       "billing_issue": "Billing Issue",
@@ -137,6 +138,7 @@
       "meter_fault": "Meter Fault"
     },
     "WATER": {
+      "name": "Water Supply",
       "new_connection": "New Connection",
       "low_pressure": "Low Pressure",
       "contamination": "Contamination",
@@ -145,6 +147,7 @@
       "no_supply": "No Supply"
     },
     "GAS": {
+      "name": "Gas Services",
       "new_connection": "New Connection",
       "gas_leak": "Gas Leak",
       "meter_issue": "Meter Issue",
@@ -153,6 +156,7 @@
       "safety_concern": "Safety Concern"
     },
     "WASTE": {
+      "name": "Waste Management",
       "missed_collection": "Missed Collection",
       "illegal_dumping": "Illegal Dumping",
       "bin_replacement": "Bin Replacement",
@@ -160,6 +164,7 @@
       "hazardous_waste": "Hazardous Waste"
     },
     "MUNI": {
+      "name": "Municipal Corporation",
       "road_repair": "Road Repair",
       "drainage_block": "Drainage Block",
       "footpath_damage": "Footpath Damage",
