@@ -13,17 +13,11 @@ export function PublicLayout() {
             </div>
             <div>
               <p className="text-[15px] font-semibold text-foreground leading-tight">Citizen Services Portal</p>
-              <p className="text-[11px] text-muted-foreground hidden sm:block">Government of India</p>
+              <p className="text-[11px] text-muted-foreground hidden sm:block">Government of Country</p>
             </div>
           </Link>
 
           <nav className="flex items-center gap-2 sm:gap-4">
-            <Link
-              to="/track"
-              className="hidden sm:inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px] px-3"
-            >
-              Track Application
-            </Link>
             <Link
               to="/login"
               className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
@@ -84,7 +78,7 @@ export function PublicLayout() {
           </div>
           <div className="mt-8 pt-6 border-t border-border text-center">
             <p className="text-[12px] text-muted-foreground">
-              &copy; 2025 Unified Citizen Services Portal. All rights reserved. Government of India.
+              &copy; 2025 Unified Citizen Services Portal. All rights reserved. Government of Country.
             </p>
           </div>
         </div>

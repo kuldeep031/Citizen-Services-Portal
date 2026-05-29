@@ -58,7 +58,7 @@ export function RegisterPage() {
           </div>
           <div>
             <p className="text-[15px] font-semibold text-primary-foreground">Citizen Services Portal</p>
-            <p className="text-[11px] text-primary-foreground/60">Government of India</p>
+            <p className="text-[11px] text-primary-foreground/60">Government of Country</p>
           </div>
         </div>
 
@@ -72,7 +72,7 @@ export function RegisterPage() {
         </div>
 
         <p className="text-[12px] text-primary-foreground/40">
-          &copy; 2025 Unified Citizen Services Portal. Government of India.
+          &copy; 2025 Unified Citizen Services Portal. Government of Country.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export function RegisterPage() {
             </div>
             <div>
               <p className="text-[15px] font-semibold text-foreground">Citizen Services Portal</p>
-              <p className="text-[11px] text-muted-foreground">Government of India</p>
+              <p className="text-[11px] text-muted-foreground">Government of Country</p>
             </div>
           </div>
 

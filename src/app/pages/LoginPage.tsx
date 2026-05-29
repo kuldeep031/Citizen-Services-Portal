@@ -47,15 +47,15 @@ export function LoginPage() {
     <div className="min-h-screen bg-background flex">
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary to-primary/90 p-12 flex-col justify-between">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 w-fit">
           <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
             <LayoutDashboard className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
           </div>
           <div>
             <p className="text-[15px] font-semibold text-primary-foreground">Citizen Services Portal</p>
-            <p className="text-[11px] text-primary-foreground/60">Government of India</p>
+            <p className="text-[11px] text-primary-foreground/60">Government of Country</p>
           </div>
-        </div>
+        </Link>
 
         <div>
           <h1 className="text-3xl font-bold text-primary-foreground mb-4 leading-tight">
@@ -67,7 +67,7 @@ export function LoginPage() {
         </div>
 
         <p className="text-[12px] text-primary-foreground/40">
-          &copy; 2025 Unified Citizen Services Portal. Government of India.
+          &copy; 2025 Unified Citizen Services Portal. Government of Country.
         </p>
       </div>
 
@@ -75,15 +75,15 @@ export function LoginPage() {
       <div className="flex-1 flex items-center justify-center p-4 sm:p-8">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center gap-3 mb-8">
+          <Link to="/" className="lg:hidden flex items-center gap-3 mb-8 w-fit">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <LayoutDashboard className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
             </div>
             <div>
               <p className="text-[15px] font-semibold text-foreground">Citizen Services Portal</p>
-              <p className="text-[11px] text-muted-foreground">Government of India</p>
+              <p className="text-[11px] text-muted-foreground">Government of Country</p>
             </div>
-          </div>
+          </Link>
 
           <div className="mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Sign in to your account</h2>
