@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "title": "Your Gateway to Government Services",
+    "subtitle": "Submit requests, track applications, and get timely resolutions — all in one place.",
+    "submitComplaint": "Submit a Complaint",
+    "trackApplication": "Track Application"
+  },
+  "stats": {
+    "complaintsResolved": "Complaints Resolved",
+    "activeCitizens": "Active Citizens",
+    "avgResolution": "Avg. Resolution (Days)",
+    "departments": "Departments Served"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "step1Title": "Submit Your Request",
+    "step1Desc": "Fill out a simple form describing your issue with the relevant department.",
+    "step2Title": "Get Assigned",
+    "step2Desc": "Your complaint is reviewed and assigned to the appropriate officer.",
+    "step3Title": "Track Progress",
+    "step3Desc": "Monitor real-time updates and communicate with the assigned officer.",
+    "step4Title": "Resolution",
+    "step4Desc": "Receive notification when your issue is resolved. Download receipt for records."
+  },
+  "services": {
+    "title": "Services Available",
+    "subtitle": "Access a wide range of civic utility services through our unified platform.",
+    "electricity": "Electricity Department",
+    "electricityDesc": "Power outages, billing issues, new connections",
+    "water": "Water Supply",
+    "waterDesc": "Water quality, supply disruptions, new connections",
+    "gas": "Gas Services",
+    "gasDesc": "Gas leaks, billing, new pipeline connections",
+    "waste": "Waste Management",
+    "wasteDesc": "Collection schedules, dumping complaints, recycling",
+    "municipal": "Municipal Corporation",
+    "municipalDesc": "Road repairs, drainage, public infrastructure",
+    "other": "Other Services",
+    "otherDesc": "General civic issues and miscellaneous requests"
+  },
+  "tracking": {
+    "title": "Track Your Application",
+    "subtitle": "Enter your ticket ID to check the current status of your complaint.",
+    "placeholder": "Enter Ticket ID (e.g., TKT-XXXXXX)",
+    "button": "Track Status",
+    "searching": "Searching...",
+    "notFound": "No complaint found with this ticket ID.",
+    "status": "Status",
+    "department": "Department",
+    "submitted": "Submitted",
+    "lastUpdated": "Last Updated"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "How do I submit a complaint?",
+    "a1": "Register as a citizen, log in, and use the 'Submit Complaint' option from your dashboard. Fill in the details and attach any supporting documents.",
+    "q2": "How long does resolution take?",
+    "a2": "Resolution time varies by department and issue complexity. You can track real-time progress using your ticket ID.",
+    "q3": "Can I track without logging in?",
+    "a3": "Yes! Use the 'Track Application' feature on the homepage with your ticket ID to check status without logging in.",
+    "q4": "What departments are covered?",
+    "a4": "We cover Electricity, Water Supply, Gas Services, Waste Management, Municipal Corporation, and more."
+  },
+  "footer": {
+    "description": "Unified platform for all civic utility services. Submit requests, track applications, and stay updated.",
+    "services": "Services",
+    "quickLinks": "Quick Links",
+    "trackApplication": "Track Application",
+    "citizenLogin": "Citizen Login",
+    "officerLogin": "Officer Login",
+    "contact": "Contact",
+    "helpline": "Helpline: 1800-111-5555",
+    "email": "Email: support@citizenportal.gov.in",
+    "hours": "Mon-Sat: 9:00 AM - 6:00 PM",
+    "copyright": "© 2025 Unified Citizen Services Portal. All rights reserved. Government of Country."
+  },
+  "login": {
+    "title": "Sign in to your account",
+    "email": "Email Address",
+    "password": "Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "submitButton": "Sign In",
+    "signingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register here",
+    "governmentOf": "Government of Country"
+  },
+  "register": {
+    "title": "Create your account",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "password": "Password",
+    "passwordPlaceholder": "Create a password",
+    "confirmPassword": "Confirm Password",
+    "confirmPlaceholder": "Confirm your password",
+    "submitButton": "Create Account",
+    "creating": "Creating account...",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Sign in here",
+    "governmentOf": "Government of Country"
+  }
+}

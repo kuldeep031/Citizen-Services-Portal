@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "citizenServices": "নাগরিক সেবা",
+    "officerPanel": "অফিসার প্যানেল",
+    "administration": "প্রশাসন",
+    "dashboard": "ড্যাশবোর্ড",
+    "submitComplaint": "অভিযোগ দাখিল করুন",
+    "trackApplication": "আবেদন ট্র্যাক করুন",
+    "manageComplaints": "অভিযোগ পরিচালনা করুন"
+  },
+  "header": {
+    "portalName": "নাগরিক পোর্টাল",
+    "panel": "প্যানেল",
+    "notifications": "বিজ্ঞপ্তি",
+    "markAllRead": "সব পঠিত",
+    "noNotifications": "কোনো বিজ্ঞপ্তি নেই",
+    "signOut": "সাইন আউট"
+  },
+  "status": {
+    "submitted": "জমা দেওয়া হয়েছে",
+    "under_review": "পর্যালোচনাধীন",
+    "in_progress": "প্রক্রিয়াধীন",
+    "resolved": "সমাধান হয়েছে",
+    "rejected": "প্রত্যাখ্যাত"
+  },
+  "common": {
+    "login": "লগইন",
+    "register": "নিবন্ধন",
+    "loading": "লোড হচ্ছে...",
+    "search": "অনুসন্ধান",
+    "submit": "জমা দিন",
+    "cancel": "বাতিল",
+    "close": "বন্ধ করুন",
+    "back": "পিছনে",
+    "next": "পরবর্তী",
+    "viewDetails": "বিস্তারিত দেখুন",
+    "download": "ডাউনলোড"
+  },
+  "language": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "bn": "বাংলা"
+  }
+}

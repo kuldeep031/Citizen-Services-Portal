@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "citizenServices": "नागरिक सेवाएँ",
+    "officerPanel": "अधिकारी पैनल",
+    "administration": "प्रशासन",
+    "dashboard": "डैशबोर्ड",
+    "submitComplaint": "शिकायत दर्ज करें",
+    "trackApplication": "आवेदन ट्रैक करें",
+    "manageComplaints": "शिकायतें प्रबंधित करें"
+  },
+  "header": {
+    "portalName": "नागरिक पोर्टल",
+    "panel": "पैनल",
+    "notifications": "सूचनाएँ",
+    "markAllRead": "सभी पढ़ी गई",
+    "noNotifications": "कोई सूचना नहीं",
+    "signOut": "साइन आउट"
+  },
+  "status": {
+    "submitted": "प्रस्तुत",
+    "under_review": "समीक्षाधीन",
+    "in_progress": "प्रगति में",
+    "resolved": "समाधान हुआ",
+    "rejected": "अस्वीकृत"
+  },
+  "common": {
+    "login": "लॉगिन",
+    "register": "पंजीकरण",
+    "loading": "लोड हो रहा है...",
+    "search": "खोजें",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "back": "वापस",
+    "next": "अगला",
+    "viewDetails": "विवरण देखें",
+    "download": "डाउनलोड"
+  },
+  "language": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "bn": "বাংলা"
+  }
+}

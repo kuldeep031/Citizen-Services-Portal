@@ -4,15 +4,8 @@ import {
   Zap, Droplet, Flame, Trash2, Building, Search, Shield, AlertTriangle,
   ChevronDown, ChevronUp, Phone, Clock, Users, FileText, ArrowRight,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../lib/api';
-
-const services = [
-  { icon: Zap, title: 'Electricity', description: 'New connections, billing, outage reports, and meter services', color: 'bg-primary/10 text-primary' },
-  { icon: Droplet, title: 'Water Supply', description: 'Connections, quality complaints, pressure issues, and leakage reports', color: 'bg-secondary/10 text-secondary' },
-  { icon: Flame, title: 'Gas Services', description: 'Gas connections, safety inspections, meter issues, and transfers', color: 'bg-accent/10 text-accent' },
-  { icon: Trash2, title: 'Waste Management', description: 'Collection schedules, missed pickups, and disposal complaints', color: 'bg-warning/10 text-warning' },
-  { icon: Building, title: 'Municipal Corporation', description: 'Roads, drainage, public works, and infrastructure maintenance', color: 'bg-info/10 text-info' },
-];
 
 interface Announcement {
   id: string;
@@ -31,20 +24,29 @@ interface PublicStats {
 
 const emergencyAlerts: { title: string; description: string; time: string }[] = [];
 
-const faqs = [
-  { question: 'How do I submit a new complaint?', answer: 'Login to your citizen account, navigate to "Submit Complaint", select the relevant department and category, fill in the details, and submit. You will receive a ticket ID for tracking.' },
-  { question: 'How long does it take to resolve a complaint?', answer: 'Resolution time depends on the department and priority. Standard SLA is 7-14 working days for non-urgent issues and 24-72 hours for urgent matters.' },
-  { question: 'How can I track my application?', answer: 'Use the "Track Application" feature on this page or after logging in. Enter your ticket ID (e.g., REQ-2025-001) to see real-time status updates.' },
-  { question: 'What documents do I need for a new connection?', answer: 'Typically you need: property ownership proof, government-issued ID, address proof, and a passport-size photograph. Specific requirements vary by department.' },
-  { question: 'Who can I contact for urgent issues?', answer: 'For emergencies, call our 24/7 helpline at 1800-111-5555. For non-urgent queries, email support@citizenportal.gov.in during business hours.' },
-];
-
 
 export function HomePage() {
   const [trackingId, setTrackingId] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [portalStats, setPortalStats] = useState<PublicStats | null>(null);
+  const { t } = useTranslation(['public', 'common']);
+
+  const services = [
+    { icon: Zap, titleKey: 'services.electricity', descKey: 'services.electricityDesc', color: 'bg-primary/10 text-primary' },
+    { icon: Droplet, titleKey: 'services.water', descKey: 'services.waterDesc', color: 'bg-secondary/10 text-secondary' },
+    { icon: Flame, titleKey: 'services.gas', descKey: 'services.gasDesc', color: 'bg-accent/10 text-accent' },
+    { icon: Trash2, titleKey: 'services.waste', descKey: 'services.wasteDesc', color: 'bg-warning/10 text-warning' },
+    { icon: Building, titleKey: 'services.municipal', descKey: 'services.municipalDesc', color: 'bg-info/10 text-info' },
+    { icon: Shield, titleKey: 'services.other', descKey: 'services.otherDesc', color: 'bg-muted text-muted-foreground' },
+  ];
+
+  const faqs = [
+    { qKey: 'faq.q1', aKey: 'faq.a1' },
+    { qKey: 'faq.q2', aKey: 'faq.a2' },
+    { qKey: 'faq.q3', aKey: 'faq.a3' },
+    { qKey: 'faq.q4', aKey: 'faq.a4' },
+  ];
 
   useEffect(() => {
     api.get<{ announcements: Announcement[] }>('announcements')
@@ -62,24 +64,24 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-              Your Gateway to<br />Government Services
+              {t('hero.title')}
             </h1>
             <p className="text-lg sm:text-xl text-primary-foreground/85 mb-8 leading-relaxed max-w-2xl">
-              Submit complaints, track applications, and access all civic utility services from one unified platform. Fast, transparent, and accessible.
+              {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 to="/login"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-white/90 transition-colors"
               >
-                Get Started
+                {t('hero.submitComplaint')}
                 <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
               </Link>
               <Link
                 to="/track"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 bg-primary-foreground/10 text-primary-foreground border border-primary-foreground/20 rounded-lg font-semibold hover:bg-primary-foreground/20 transition-colors"
               >
-                Track Application
+                {t('hero.trackApplication')}
               </Link>
             </div>
           </div>
@@ -96,7 +98,7 @@ export function HomePage() {
               </div>
               <div>
                 <p className="text-lg sm:text-xl font-bold text-card-foreground tabular-nums">{portalStats ? portalStats.complaintsResolved.toLocaleString('en-IN') : '—'}</p>
-                <p className="text-[12px] text-muted-foreground">Complaints Resolved</p>
+                <p className="text-[12px] text-muted-foreground">{t('stats.complaintsResolved')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -105,7 +107,7 @@ export function HomePage() {
               </div>
               <div>
                 <p className="text-lg sm:text-xl font-bold text-card-foreground tabular-nums">{portalStats ? portalStats.activeCitizens.toLocaleString('en-IN') : '—'}</p>
-                <p className="text-[12px] text-muted-foreground">Registered Citizens</p>
+                <p className="text-[12px] text-muted-foreground">{t('stats.activeCitizens')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -113,8 +115,8 @@ export function HomePage() {
                 <Clock className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-lg sm:text-xl font-bold text-card-foreground tabular-nums">{portalStats ? `${portalStats.avgResolutionDays} days` : '—'}</p>
-                <p className="text-[12px] text-muted-foreground">Avg Resolution Time</p>
+                <p className="text-lg sm:text-xl font-bold text-card-foreground tabular-nums">{portalStats ? portalStats.avgResolutionDays : '—'}</p>
+                <p className="text-[12px] text-muted-foreground">{t('stats.avgResolution')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -123,7 +125,7 @@ export function HomePage() {
               </div>
               <div>
                 <p className="text-lg sm:text-xl font-bold text-card-foreground tabular-nums">{portalStats ? portalStats.departmentsServed : '—'}</p>
-                <p className="text-[12px] text-muted-foreground">Departments Served</p>
+                <p className="text-[12px] text-muted-foreground">{t('stats.departments')}</p>
               </div>
             </div>
           </div>
@@ -134,8 +136,8 @@ export function HomePage() {
       <section className="bg-muted/50 py-10 sm:py-12" aria-label="Quick application tracking">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-xl sm:text-2xl font-bold mb-2">Track Your Application</h2>
-            <p className="text-[15px] text-muted-foreground mb-5">Enter your ticket ID to check the current status</p>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">{t('tracking.title')}</h2>
+            <p className="text-[15px] text-muted-foreground mb-5">{t('tracking.subtitle')}</p>
             <div className="flex gap-3">
               <div className="flex-1 relative">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" aria-hidden="true" />
@@ -143,7 +145,7 @@ export function HomePage() {
                   type="text"
                   value={trackingId}
                   onChange={(e) => setTrackingId(e.target.value)}
-                  placeholder="e.g., REQ-2025-001"
+                  placeholder={t('tracking.placeholder')}
                   aria-label="Ticket ID"
                   className="w-full pl-11 pr-4 py-3 min-h-[48px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 />
@@ -152,7 +154,7 @@ export function HomePage() {
                 to={trackingId ? `/track?id=${trackingId}` : '/track'}
                 className="inline-flex items-center min-h-[48px] px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
-                Track
+                {t('tracking.button')}
               </Link>
             </div>
           </div>
@@ -163,19 +165,19 @@ export function HomePage() {
       <section className="py-12 sm:py-16" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 id="services-heading" className="text-xl sm:text-2xl font-bold mb-2">Our Services</h2>
-            <p className="text-[15px] text-muted-foreground max-w-lg mx-auto">Access all civic utility departments through a single platform</p>
+            <h2 id="services-heading" className="text-xl sm:text-2xl font-bold mb-2">{t('services.title')}</h2>
+            <p className="text-[15px] text-muted-foreground max-w-lg mx-auto">{t('services.subtitle')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {services.map((service) => {
               const Icon = service.icon;
               return (
-                <article key={service.title} className="bg-card rounded-xl p-5 sm:p-6 shadow-sm border border-border hover:shadow-md hover:border-primary/20 transition-all">
+                <article key={service.titleKey} className="bg-card rounded-xl p-5 sm:p-6 shadow-sm border border-border hover:shadow-md hover:border-primary/20 transition-all">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${service.color}`} aria-hidden="true">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-[15px] font-semibold text-card-foreground mb-1.5">{service.title}</h3>
-                  <p className="text-[13px] text-muted-foreground leading-relaxed">{service.description}</p>
+                  <h3 className="text-[15px] font-semibold text-card-foreground mb-1.5">{t(service.titleKey)}</h3>
+                  <p className="text-[13px] text-muted-foreground leading-relaxed">{t(service.descKey)}</p>
                 </article>
               );
             })}
@@ -227,8 +229,7 @@ export function HomePage() {
       <section className="py-12 sm:py-16" aria-labelledby="faq-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 id="faq-heading" className="text-xl sm:text-2xl font-bold mb-2">Frequently Asked Questions</h2>
-            <p className="text-[15px] text-muted-foreground">Find answers to common questions about our services</p>
+            <h2 id="faq-heading" className="text-xl sm:text-2xl font-bold mb-2">{t('faq.title')}</h2>
           </div>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
@@ -238,7 +239,7 @@ export function HomePage() {
                   aria-expanded={openFaq === i}
                   className="w-full flex items-center justify-between p-4 sm:p-5 text-left min-h-[44px]"
                 >
-                  <span className="text-sm font-medium text-card-foreground pr-4">{faq.question}</span>
+                  <span className="text-sm font-medium text-card-foreground pr-4">{t(faq.qKey)}</span>
                   {openFaq === i ? (
                     <ChevronUp className="w-4 h-4 text-muted-foreground flex-shrink-0" aria-hidden="true" />
                   ) : (
@@ -247,7 +248,7 @@ export function HomePage() {
                 </button>
                 {openFaq === i && (
                   <div className="px-4 sm:px-5 pb-4 sm:pb-5">
-                    <p className="text-[13px] text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    <p className="text-[13px] text-muted-foreground leading-relaxed">{t(faq.aKey)}</p>
                   </div>
                 )}
               </div>
@@ -259,9 +260,9 @@ export function HomePage() {
       {/* Login CTA */}
       <section className="bg-gradient-to-br from-primary to-primary/90 py-12 sm:py-16" aria-label="Login options">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground mb-3">Ready to Get Started?</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground mb-3">{t('hero.title')}</h2>
           <p className="text-[15px] text-primary-foreground/80 mb-8 max-w-lg mx-auto">
-            Login to access your dashboard, submit complaints, and track your applications in real-time.
+            {t('hero.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
             <Link
@@ -269,14 +270,14 @@ export function HomePage() {
               className="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-white/90 transition-colors flex-1 sm:flex-none"
             >
               <Users className="w-4 h-4" aria-hidden="true" />
-              Citizen Login
+              {t('footer.citizenLogin')}
             </Link>
             <Link
               to="/login"
               className="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 bg-primary-foreground/10 text-primary-foreground border border-primary-foreground/20 rounded-lg font-semibold hover:bg-primary-foreground/20 transition-colors flex-1 sm:flex-none"
             >
               <Shield className="w-4 h-4" aria-hidden="true" />
-              Officer / Admin Login
+              {t('footer.officerLogin')}
             </Link>
           </div>
         </div>
@@ -287,10 +288,10 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
           <Phone className="w-5 h-5 text-primary" aria-hidden="true" />
           <p className="text-sm text-card-foreground">
-            <span className="font-semibold">24/7 Helpline:</span> 1800-111-5555
+            <span className="font-semibold">{t('footer.helpline')}</span>
             <span className="mx-2 text-border hidden sm:inline">|</span>
             <span className="block sm:inline mt-1 sm:mt-0">
-              <span className="font-semibold">Email:</span> support@citizenportal.gov.in
+              <span className="font-semibold">{t('footer.email')}</span>
             </span>
           </p>
         </div>

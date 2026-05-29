@@ -5,6 +5,7 @@ import { NotificationCard } from '../components/NotificationCard';
 import { StatusBadge } from '../components/StatusBadge';
 import { Zap, Droplet, Flame, Trash2, FileText, Clock, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../lib/api';
 import { useAuth } from '../../auth';
 
@@ -47,6 +48,7 @@ function mapStatus(status: string): 'pending' | 'in-progress' | 'resolved' | 're
 
 export function CitizenDashboard() {
   const { user } = useAuth();
+  const { t } = useTranslation('citizen');
   const [complaints, setComplaints] = useState<ComplaintItem[]>([]);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [stats, setStats] = useState({ active: 0, pending: 0, resolved: 0, urgent: 0 });
@@ -92,48 +94,48 @@ export function CitizenDashboard() {
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Welcome Banner */}
       <section className="bg-gradient-to-br from-primary via-primary to-primary/85 rounded-xl p-6 sm:p-8 text-primary-foreground">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {user?.name?.split(' ')[0]}!</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">{t('dashboard.welcome', { name: user?.name?.split(' ')[0] })}</h1>
         <p className="text-primary-foreground/85 text-[15px] sm:text-base max-w-2xl leading-relaxed">
-          Access all government services in one place. Submit complaints, track applications, and stay updated.
+          {t('dashboard.description')}
         </p>
       </section>
 
       {/* Overview Stats */}
       <section aria-labelledby="overview-heading">
-        <h2 id="overview-heading" className="mb-4">Overview</h2>
+        <h2 id="overview-heading" className="mb-4">{t('dashboard.overview')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          <StatsCard title="Active Requests" value={stats.active} icon={FileText} color="primary" />
-          <StatsCard title="Pending Approvals" value={stats.pending} icon={Clock} color="warning" />
-          <StatsCard title="Resolved Issues" value={stats.resolved} icon={CheckCircle} color="success" />
-          <StatsCard title="Urgent Alerts" value={stats.urgent} icon={AlertCircle} color="info" />
+          <StatsCard title={t('dashboard.activeRequests')} value={stats.active} icon={FileText} color="primary" />
+          <StatsCard title={t('dashboard.pendingApprovals')} value={stats.pending} icon={Clock} color="warning" />
+          <StatsCard title={t('dashboard.resolvedIssues')} value={stats.resolved} icon={CheckCircle} color="success" />
+          <StatsCard title={t('dashboard.urgentAlerts')} value={stats.urgent} icon={AlertCircle} color="info" />
         </div>
       </section>
 
       {/* Quick Access Services */}
       <section aria-labelledby="services-heading">
-        <h2 id="services-heading" className="mb-4">Quick Access Services</h2>
+        <h2 id="services-heading" className="mb-4">{t('dashboard.quickAccess')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          <ServiceCard title="Electricity" description="New connections, bill payments, and complaints" icon={Zap} href="/citizen/submit-complaint?dept=electricity" color="primary" />
-          <ServiceCard title="Water Supply" description="Water connections and quality complaints" icon={Droplet} href="/citizen/submit-complaint?dept=water" color="secondary" />
-          <ServiceCard title="Gas Services" description="Gas connections and safety issues" icon={Flame} href="/citizen/submit-complaint?dept=gas" color="accent" />
-          <ServiceCard title="Waste Management" description="Collection schedules and complaints" icon={Trash2} href="/citizen/submit-complaint?dept=waste" color="primary" />
+          <ServiceCard title={t('services.electricity')} description={t('services.electricityDesc')} icon={Zap} href="/citizen/submit-complaint?dept=electricity" color="primary" />
+          <ServiceCard title={t('services.water')} description={t('services.waterDesc')} icon={Droplet} href="/citizen/submit-complaint?dept=water" color="secondary" />
+          <ServiceCard title={t('services.gas')} description={t('services.gasDesc')} icon={Flame} href="/citizen/submit-complaint?dept=gas" color="accent" />
+          <ServiceCard title={t('services.waste')} description={t('services.wasteDesc')} icon={Trash2} href="/citizen/submit-complaint?dept=waste" color="primary" />
         </div>
       </section>
 
       {/* Recent Requests + Notifications */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <section className="lg:col-span-2" aria-labelledby="requests-heading">
-          <h2 id="requests-heading" className="mb-4">Recent Requests</h2>
+          <h2 id="requests-heading" className="mb-4">{t('dashboard.recentRequests')}</h2>
           <div className="bg-card rounded-xl shadow-sm border border-border overflow-hidden">
             {complaints.length > 0 ? (
               <div className="overflow-x-auto" role="region" aria-label="Recent requests table" tabIndex={0}>
                 <table className="w-full">
                   <thead className="bg-muted/50">
                     <tr>
-                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">Request ID</th>
-                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">Title</th>
-                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden sm:table-cell">Department</th>
-                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">Status</th>
+                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('dashboard.requestId')}</th>
+                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('dashboard.title')}</th>
+                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground hidden sm:table-cell">{t('dashboard.department')}</th>
+                      <th scope="col" className="px-5 py-3.5 text-left text-[13px] font-semibold text-foreground">{t('dashboard.status')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
@@ -157,15 +159,15 @@ export function CitizenDashboard() {
             ) : (
               <div className="p-10 text-center">
                 <FileText className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" aria-hidden="true" />
-                <p className="text-sm font-medium text-muted-foreground">No requests yet</p>
-                <p className="text-[13px] text-muted-foreground/60 mt-1">Submit your first complaint to get started</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('dashboard.noRequests')}</p>
+                <p className="text-[13px] text-muted-foreground/60 mt-1">{t('dashboard.noRequestsHint')}</p>
               </div>
             )}
           </div>
         </section>
 
         <section aria-labelledby="notifications-heading">
-          <h2 id="notifications-heading" className="mb-4">Notifications</h2>
+          <h2 id="notifications-heading" className="mb-4">{t('dashboard.notifications')}</h2>
           <div className="space-y-3">
             {notifications.length > 0 ? (
               notifications.map((n) => (
@@ -173,7 +175,7 @@ export function CitizenDashboard() {
               ))
             ) : (
               <div className="bg-card rounded-xl p-8 border border-border text-center">
-                <p className="text-sm text-muted-foreground">No notifications</p>
+                <p className="text-sm text-muted-foreground">{t('dashboard.noNotifications')}</p>
               </div>
             )}
           </div>

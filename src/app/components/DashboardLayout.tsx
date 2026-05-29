@@ -12,8 +12,10 @@ import {
   LogOut,
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../auth';
 import { api } from '../../lib/api';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import type { UserRole } from '../../auth';
 
 interface NotificationItem {
@@ -25,31 +27,31 @@ interface NotificationItem {
   createdAt: string;
 }
 
-const navConfig: Record<UserRole, { title: string; items: { path: string; label: string; icon: typeof Home }[] }[]> = {
+const navConfig: Record<UserRole, { titleKey: string; items: { path: string; labelKey: string; icon: typeof Home }[] }[]> = {
   citizen: [
     {
-      title: 'Citizen Services',
+      titleKey: 'nav.citizenServices',
       items: [
-        { path: '/citizen', label: 'Dashboard', icon: Home },
-        { path: '/citizen/submit-complaint', label: 'Submit Complaint', icon: FileText },
-        { path: '/citizen/track-application', label: 'Track Application', icon: Search },
+        { path: '/citizen', labelKey: 'nav.dashboard', icon: Home },
+        { path: '/citizen/submit-complaint', labelKey: 'nav.submitComplaint', icon: FileText },
+        { path: '/citizen/track-application', labelKey: 'nav.trackApplication', icon: Search },
       ],
     },
   ],
   officer: [
     {
-      title: 'Officer Panel',
+      titleKey: 'nav.officerPanel',
       items: [
-        { path: '/officer', label: 'Dashboard', icon: Shield },
+        { path: '/officer', labelKey: 'nav.dashboard', icon: Shield },
       ],
     },
   ],
   admin: [
     {
-      title: 'Administration',
+      titleKey: 'nav.administration',
       items: [
-        { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-        { path: '/admin/complaints', label: 'Manage Complaints', icon: FileText },
+        { path: '/admin', labelKey: 'nav.dashboard', icon: LayoutDashboard },
+        { path: '/admin/complaints', labelKey: 'nav.manageComplaints', icon: FileText },
       ],
     },
   ],
@@ -59,6 +61,7 @@ export function DashboardLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -116,10 +119,10 @@ export function DashboardLayout() {
     navigate('/', { replace: true });
   };
 
-  const NavSection = ({ title, items }: { title: string; items: typeof navConfig.citizen[0]['items'] }) => (
-    <div className="mb-8" role="group" aria-label={title}>
+  const NavSection = ({ titleKey, items }: { titleKey: string; items: typeof navConfig.citizen[0]['items'] }) => (
+    <div className="mb-8" role="group" aria-label={t(titleKey)}>
       <p className="px-3 mb-3 text-[11px] font-semibold text-sidebar-foreground/50 uppercase tracking-widest">
-        {title}
+        {t(titleKey)}
       </p>
       <ul className="space-y-1">
         {items.map((item) => {
@@ -138,7 +141,7 @@ export function DashboardLayout() {
                 }`}
               >
                 <Icon className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
-                <span className="text-sm">{item.label}</span>
+                <span className="text-sm">{t(item.labelKey)}</span>
               </Link>
             </li>
           );
@@ -165,8 +168,8 @@ export function DashboardLayout() {
                 <LayoutDashboard className="w-5 h-5 text-sidebar-primary-foreground" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-[15px] font-semibold text-sidebar-foreground leading-tight">Citizen Portal</p>
-                <p className="text-[11px] text-sidebar-foreground/60 mt-0.5 capitalize">{user.role} Panel</p>
+                <p className="text-[15px] font-semibold text-sidebar-foreground leading-tight">{t('header.portalName')}</p>
+                <p className="text-[11px] text-sidebar-foreground/60 mt-0.5 capitalize">{user.role} {t('header.panel')}</p>
               </div>
             </div>
             <button
@@ -181,7 +184,7 @@ export function DashboardLayout() {
           {/* Navigation */}
           <nav className="flex-1 px-3 pt-6 pb-4 overflow-y-auto">
             {sections.map((section) => (
-              <NavSection key={section.title} title={section.title} items={section.items} />
+              <NavSection key={section.titleKey} titleKey={section.titleKey} items={section.items} />
             ))}
           </nav>
 
@@ -201,7 +204,7 @@ export function DashboardLayout() {
               className="flex items-center gap-3 w-full px-3 py-2.5 min-h-[44px] rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"
             >
               <LogOut className="w-4 h-4" aria-hidden="true" />
-              <span className="text-sm">Sign Out</span>
+              <span className="text-sm">{t('header.signOut')}</span>
             </button>
           </div>
         </div>
@@ -223,6 +226,7 @@ export function DashboardLayout() {
             <div className="flex-1" />
 
             <div className="flex items-center gap-2">
+              <LanguageSwitcher />
               <div className="relative" ref={notifRef}>
                 <button
                   onClick={() => setNotifOpen(!notifOpen)}
@@ -241,13 +245,13 @@ export function DashboardLayout() {
                 {notifOpen && (
                   <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 bg-card rounded-xl shadow-lg border border-border z-50 overflow-hidden" role="menu">
                     <div className="flex items-center justify-between px-4 py-3 border-b border-border">
-                      <p className="text-sm font-semibold text-card-foreground">Notifications</p>
+                      <p className="text-sm font-semibold text-card-foreground">{t('header.notifications')}</p>
                       {unreadCount > 0 && (
                         <button
                           onClick={handleMarkAllRead}
                           className="text-[12px] text-primary font-medium hover:underline"
                         >
-                          Mark all read
+                          {t('header.markAllRead')}
                         </button>
                       )}
                     </div>
@@ -274,7 +278,7 @@ export function DashboardLayout() {
                         ))
                       ) : (
                         <div className="px-4 py-8 text-center">
-                          <p className="text-sm text-muted-foreground">No notifications</p>
+                          <p className="text-sm text-muted-foreground">{t('header.noNotifications')}</p>
                         </div>
                       )}
                     </div>

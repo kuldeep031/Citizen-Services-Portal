@@ -1,0 +1,170 @@
+{
+  "dashboard": {
+    "welcome": "স্বাগতম, {{name}}!",
+    "description": "সমস্ত সরকারি সেবা এক জায়গায়। অভিযোগ দাখিল করুন, আবেদন ট্র্যাক করুন, এবং আপডেট থাকুন।",
+    "overview": "সারসংক্ষেপ",
+    "activeRequests": "সক্রিয় অনুরোধ",
+    "pendingApprovals": "অনুমোদনের অপেক্ষায়",
+    "resolvedIssues": "সমাধানকৃত সমস্যা",
+    "urgentAlerts": "জরুরি সতর্কতা",
+    "quickAccess": "দ্রুত সেবা",
+    "recentRequests": "সাম্প্রতিক অনুরোধ",
+    "noRequests": "এখনো কোনো অনুরোধ নেই",
+    "noRequestsHint": "শুরু করতে আপনার প্রথম অভিযোগ দাখিল করুন",
+    "requestId": "অনুরোধ আইডি",
+    "title": "শিরোনাম",
+    "department": "বিভাগ",
+    "status": "স্থিতি",
+    "notifications": "বিজ্ঞপ্তি",
+    "noNotifications": "কোনো বিজ্ঞপ্তি নেই"
+  },
+  "services": {
+    "electricity": "বিদ্যুৎ",
+    "electricityDesc": "নতুন সংযোগ, বিল পরিশোধ, এবং অভিযোগ",
+    "water": "জল সরবরাহ",
+    "waterDesc": "জল সংযোগ এবং গুণমান অভিযোগ",
+    "gas": "গ্যাস সেবা",
+    "gasDesc": "গ্যাস সংযোগ এবং নিরাপত্তা সমস্যা",
+    "waste": "বর্জ্য ব্যবস্থাপনা",
+    "wasteDesc": "সংগ্রহ সময়সূচি এবং অভিযোগ"
+  },
+  "time": {
+    "justNow": "এইমাত্র",
+    "hoursAgo_one": "{{count}} ঘণ্টা আগে",
+    "hoursAgo_other": "{{count}} ঘণ্টা আগে",
+    "daysAgo_one": "{{count}} দিন আগে",
+    "daysAgo_other": "{{count}} দিন আগে"
+  },
+  "submit": {
+    "heading": "অভিযোগ দাখিল করুন",
+    "description": "আপনার অভিযোগ বা সেবা অনুরোধ দাখিল করতে নিচের বিবরণ পূরণ করুন।",
+    "steps": {
+      "department": "বিভাগ",
+      "details": "বিবরণ",
+      "location": "স্থান ও অগ্রাধিকার",
+      "documents": "নথিপত্র",
+      "review": "পর্যালোচনা"
+    },
+    "selectDepartment": "বিভাগ নির্বাচন করুন",
+    "selectCategory": "শ্রেণী নির্বাচন করুন",
+    "form": {
+      "title": "অভিযোগের শিরোনাম",
+      "titlePlaceholder": "আপনার অভিযোগের সংক্ষিপ্ত শিরোনাম",
+      "description": "বিবরণ",
+      "descriptionPlaceholder": "আপনার সমস্যা বিস্তারিত বর্ণনা করুন...",
+      "contactName": "যোগাযোগের নাম",
+      "contactNamePlaceholder": "আপনার পুরো নাম",
+      "phone": "ফোন নম্বর",
+      "phonePlaceholder": "+91 XXXXX XXXXX",
+      "email": "ইমেইল ঠিকানা",
+      "emailPlaceholder": "you@example.com",
+      "location": "স্থান / ঠিকানা",
+      "locationPlaceholder": "সমস্যার পূর্ণ ঠিকানা বা ল্যান্ডমার্ক দিন"
+    },
+    "priority": {
+      "heading": "অগ্রাধিকার স্তর",
+      "low": "কম",
+      "lowDesc": "অ-জরুরি, সাধারণ জিজ্ঞাসা",
+      "medium": "মাঝারি",
+      "mediumDesc": "এক সপ্তাহের মধ্যে মনোযোগ প্রয়োজন",
+      "high": "উচ্চ",
+      "highDesc": "জরুরি, তাৎক্ষণিক পদক্ষেপ প্রয়োজন"
+    },
+    "upload": {
+      "heading": "নথিপত্র আপলোড করুন",
+      "description": "ছবি, বিল, বা সহায়ক নথি সংযুক্ত করুন (ঐচ্ছিক)।",
+      "clickToUpload": "আপলোড করতে ক্লিক করুন বা ড্র্যাগ অ্যান্ড ড্রপ করুন",
+      "fileTypes": "PDF, PNG, JPG প্রতিটি ১০MB পর্যন্ত",
+      "filesSelected": "{{count}}টি ফাইল নির্বাচিত",
+      "noFiles": "এখনো কোনো ফাইল আপলোড হয়নি। প্রয়োজন না হলে এই ধাপ এড়িয়ে যেতে পারেন।"
+    },
+    "review": {
+      "heading": "আপনার অভিযোগ পর্যালোচনা করুন",
+      "description": "দাখিল করার আগে নিচের বিবরণ যাচাই করুন।",
+      "department": "বিভাগ",
+      "category": "শ্রেণী",
+      "title": "শিরোনাম",
+      "descriptionLabel": "বিবরণ",
+      "location": "স্থান",
+      "priority": "অগ্রাধিকার",
+      "contact": "যোগাযোগ",
+      "attachments": "সংযুক্তি"
+    },
+    "back": "পিছনে",
+    "next": "পরবর্তী",
+    "submitting": "দাখিল হচ্ছে...",
+    "submitButton": "অভিযোগ দাখিল করুন",
+    "success": {
+      "heading": "অভিযোগ সফলভাবে দাখিল হয়েছে",
+      "message": "আপনার অভিযোগ নিবন্ধিত হয়েছে। নিচের টিকেট আইডি দিয়ে অগ্রগতি ট্র্যাক করুন।",
+      "ticketId": "টিকেট আইডি",
+      "trackButton": "আবেদন ট্র্যাক করুন",
+      "submitAnother": "আরেকটি দাখিল করুন"
+    }
+  },
+  "tracking": {
+    "heading": "আবেদন ট্র্যাক করুন",
+    "description": "আপনার আবেদনের বর্তমান স্থিতি এবং সময়রেখা দেখতে আপনার টিকেট আইডি দিন।",
+    "placeholder": "টিকেট আইডি দিন (যেমন, TKT-XXXXXX)",
+    "search": "অনুসন্ধান",
+    "searching": "অনুসন্ধান করা হচ্ছে...",
+    "notFound": "এই টিকেট আইডি দিয়ে কোনো আবেদন পাওয়া যায়নি। অনুগ্রহ করে যাচাই করে আবার চেষ্টা করুন।",
+    "emptyState": "আবেদনের বিবরণ দেখতে উপরে টিকেট আইডি দিন",
+    "emptyHint": "আপনার টিকেট আইডি নিশ্চিতকরণ ইমেইল বা SMS-এ পাবেন",
+    "submitted": "দাখিল করা হয়েছে",
+    "slaDeadline": "SLA সময়সীমা",
+    "daysRemaining": "অবশিষ্ট দিন",
+    "completed": "সম্পন্ন",
+    "overdue": "বিলম্বিত",
+    "days": "দিন",
+    "timeline": "স্থিতি সময়রেখা",
+    "noUpdates": "এখনো কোনো স্থিতি আপডেট নেই।",
+    "assignedOfficer": "নিয়োগকৃত অফিসার",
+    "notAssigned": "এখনো নিয়োগ করা হয়নি",
+    "details": "বিবরণ",
+    "department": "বিভাগ",
+    "priority": "অগ্রাধিকার",
+    "downloadReceipt": "রসিদ ডাউনলোড করুন",
+    "current": "বর্তমান"
+  },
+  "categories": {
+    "ELEC": {
+      "new_connection": "নতুন সংযোগ",
+      "disconnection": "সংযোগ বিচ্ছিন্ন",
+      "billing_issue": "বিলিং সমস্যা",
+      "power_outage": "বিদ্যুৎ বিভ্রাট",
+      "street_light": "রাস্তার বাতি",
+      "meter_fault": "মিটার ত্রুটি"
+    },
+    "WATER": {
+      "new_connection": "নতুন সংযোগ",
+      "low_pressure": "কম চাপ",
+      "contamination": "দূষণ",
+      "leakage": "লিকেজ",
+      "billing_issue": "বিলিং সমস্যা",
+      "no_supply": "সরবরাহ নেই"
+    },
+    "GAS": {
+      "new_connection": "নতুন সংযোগ",
+      "gas_leak": "গ্যাস লিক",
+      "meter_issue": "মিটার সমস্যা",
+      "billing_issue": "বিলিং সমস্যা",
+      "transfer": "স্থানান্তর",
+      "safety_concern": "নিরাপত্তা উদ্বেগ"
+    },
+    "WASTE": {
+      "missed_collection": "সংগ্রহ বাদ পড়েছে",
+      "illegal_dumping": "অবৈধ ডাম্পিং",
+      "bin_replacement": "বিন প্রতিস্থাপন",
+      "schedule_change": "সময়সূচি পরিবর্তন",
+      "hazardous_waste": "বিপজ্জনক বর্জ্য"
+    },
+    "MUNI": {
+      "road_repair": "রাস্তা মেরামত",
+      "drainage_block": "নিষ্কাশন অবরোধ",
+      "footpath_damage": "ফুটপাত ক্ষতি",
+      "public_toilet": "পাবলিক টয়লেট",
+      "park_maintenance": "পার্ক রক্ষণাবেক্ষণ"
+    }
+  }
+}

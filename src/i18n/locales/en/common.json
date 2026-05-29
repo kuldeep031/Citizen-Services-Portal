@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "citizenServices": "Citizen Services",
+    "officerPanel": "Officer Panel",
+    "administration": "Administration",
+    "dashboard": "Dashboard",
+    "submitComplaint": "Submit Complaint",
+    "trackApplication": "Track Application",
+    "manageComplaints": "Manage Complaints"
+  },
+  "header": {
+    "portalName": "Citizen Portal",
+    "panel": "Panel",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications",
+    "signOut": "Sign Out"
+  },
+  "status": {
+    "submitted": "Submitted",
+    "under_review": "Under Review",
+    "in_progress": "In Progress",
+    "resolved": "Resolved",
+    "rejected": "Rejected"
+  },
+  "common": {
+    "login": "Login",
+    "register": "Register",
+    "loading": "Loading...",
+    "search": "Search",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "viewDetails": "View Details",
+    "download": "Download"
+  },
+  "language": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "bn": "বাংলা"
+  }
+}

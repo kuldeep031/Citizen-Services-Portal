@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { Search, Download, Clock, Calendar, User, MapPin, Building, Inbox, Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { StatusBadge } from '../components/StatusBadge';
 import { Timeline, TimelineItem } from '../components/Timeline';
 import { api, ApiError } from '../../lib/api';
@@ -44,6 +45,7 @@ function mapTimelineStatus(index: number, total: number, appStatus: string): 'co
 }
 
 export function ApplicationTracking() {
+  const { t } = useTranslation('citizen');
   const [searchParams] = useSearchParams();
   const initialId = searchParams.get('id') || '';
 
@@ -137,8 +139,8 @@ export function ApplicationTracking() {
   return (
     <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold mb-1">Track Application</h1>
-        <p className="text-[15px] text-muted-foreground">Enter your ticket ID to view the current status and timeline of your application.</p>
+        <h1 className="text-xl sm:text-2xl font-bold mb-1">{t('tracking.heading')}</h1>
+        <p className="text-[15px] text-muted-foreground">{t('tracking.description')}</p>
       </div>
 
       {/* Search Box */}
@@ -151,7 +153,7 @@ export function ApplicationTracking() {
               value={searchId}
               onChange={(e) => setSearchId(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter Ticket ID (e.g., REQ-2025-001)"
+              placeholder={t('tracking.placeholder')}
               aria-label="Ticket ID"
               className="w-full pl-11 pr-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
             />
@@ -161,11 +163,11 @@ export function ApplicationTracking() {
             disabled={isSearching || !searchId.trim()}
             className="min-h-[44px] px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {isSearching ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : 'Search'}
+            {isSearching ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : t('tracking.search')}
           </button>
         </div>
         {notFound && (
-          <p className="text-sm text-destructive mt-3" role="alert">No application found with that ticket ID. Please check and try again.</p>
+          <p className="text-sm text-destructive mt-3" role="alert">{t('tracking.notFound')}</p>
         )}
       </section>
 
@@ -173,8 +175,8 @@ export function ApplicationTracking() {
       {!application && !notFound && !isSearching && (
         <div className="bg-card rounded-xl p-10 sm:p-14 shadow-sm border border-border text-center">
           <Inbox className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" aria-hidden="true" />
-          <p className="text-sm font-medium text-muted-foreground">Enter a ticket ID above to view application details</p>
-          <p className="text-[13px] text-muted-foreground/60 mt-1">You can find your ticket ID in the confirmation email or SMS</p>
+          <p className="text-sm font-medium text-muted-foreground">{t('tracking.emptyState')}</p>
+          <p className="text-[13px] text-muted-foreground/60 mt-1">{t('tracking.emptyHint')}</p>
         </div>
       )}
 
@@ -199,7 +201,7 @@ export function ApplicationTracking() {
               </div>
               <button onClick={handleDownloadReceipt} className="flex items-center gap-2 min-h-[44px] px-4 py-2.5 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-colors self-start flex-shrink-0" aria-label="Download receipt">
                 <Download className="w-4 h-4" aria-hidden="true" />
-                Download Receipt
+                {t('tracking.downloadReceipt')}
               </button>
             </div>
             <p className="text-[13px] text-muted-foreground leading-relaxed">{application.description}</p>
@@ -212,14 +214,14 @@ export function ApplicationTracking() {
                 <article className="bg-card rounded-xl p-4 sm:p-5 shadow-sm border border-border">
                   <div className="flex items-center gap-2 mb-2">
                     <Calendar className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Submitted</p>
+                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('tracking.submitted')}</p>
                   </div>
                   <p className="text-sm font-semibold text-card-foreground tabular-nums">{formatDate(application.submittedDate)}</p>
                 </article>
                 <article className="bg-card rounded-xl p-4 sm:p-5 shadow-sm border border-border">
                   <div className="flex items-center gap-2 mb-2">
                     <Clock className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">SLA Deadline</p>
+                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('tracking.slaDeadline')}</p>
                   </div>
                   <p className="text-sm font-semibold text-card-foreground tabular-nums">
                     {application.slaDeadline ? formatDate(application.slaDeadline) : 'N/A'}
@@ -228,25 +230,25 @@ export function ApplicationTracking() {
                 <article className={`bg-card rounded-xl p-4 sm:p-5 shadow-sm border ${application.daysRemaining !== null && application.daysRemaining <= 3 && application.daysRemaining > 0 ? 'border-warning/50' : 'border-border'}`}>
                   <div className="flex items-center gap-2 mb-2">
                     <Clock className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">Days Remaining</p>
+                    <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold">{t('tracking.daysRemaining')}</p>
                   </div>
                   <p className={`text-sm font-semibold tabular-nums ${
                     application.status === 'resolved' ? 'text-success' :
                     application.isBreached ? 'text-destructive' :
                     (application.daysRemaining !== null && application.daysRemaining <= 3) ? 'text-warning' : 'text-card-foreground'
                   }`}>
-                    {application.status === 'resolved' ? 'Completed' : application.isBreached ? 'Overdue' : `${application.daysRemaining ?? 'N/A'} days`}
+                    {application.status === 'resolved' ? t('tracking.completed') : application.isBreached ? t('tracking.overdue') : `${application.daysRemaining ?? 'N/A'} ${t('tracking.days')}`}
                   </p>
                 </article>
               </div>
 
               {/* Timeline */}
               <section className="bg-card rounded-xl p-5 sm:p-6 shadow-sm border border-border" aria-label="Status timeline">
-                <h3 className="font-semibold mb-5">Status Timeline</h3>
+                <h3 className="font-semibold mb-5">{t('tracking.timeline')}</h3>
                 {timelineItems.length > 0 ? (
                   <Timeline items={timelineItems} />
                 ) : (
-                  <p className="text-sm text-muted-foreground">No status updates yet.</p>
+                  <p className="text-sm text-muted-foreground">{t('tracking.noUpdates')}</p>
                 )}
               </section>
             </div>
@@ -254,7 +256,7 @@ export function ApplicationTracking() {
             <div className="space-y-5 sm:space-y-6">
               {/* Officer Update */}
               <section className="bg-card rounded-xl p-5 sm:p-6 shadow-sm border border-border" aria-label="Officer update">
-                <h3 className="font-semibold mb-4">Assigned Officer</h3>
+                <h3 className="font-semibold mb-4">{t('tracking.assignedOfficer')}</h3>
                 {application.officer ? (
                   <div className="space-y-3">
                     <div className="flex items-center gap-2.5">
@@ -269,13 +271,13 @@ export function ApplicationTracking() {
                     )}
                   </div>
                 ) : (
-                  <p className="text-[13px] text-muted-foreground">Not yet assigned</p>
+                  <p className="text-[13px] text-muted-foreground">{t('tracking.notAssigned')}</p>
                 )}
               </section>
 
               {/* Details */}
               <section className="bg-card rounded-xl p-5 sm:p-6 shadow-sm border border-border" aria-label="Application details">
-                <h3 className="font-semibold mb-4">Details</h3>
+                <h3 className="font-semibold mb-4">{t('tracking.details')}</h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" aria-hidden="true" />
@@ -283,11 +285,11 @@ export function ApplicationTracking() {
                   </div>
                   <div className="pt-3 mt-3 border-t border-border space-y-2.5">
                     <div>
-                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-0.5">Department</p>
+                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-0.5">{t('tracking.department')}</p>
                       <p className="text-sm font-medium text-card-foreground">{application.department} — {application.category}</p>
                     </div>
                     <div>
-                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-0.5">Priority</p>
+                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-semibold mb-0.5">{t('tracking.priority')}</p>
                       <p className="text-sm font-medium text-card-foreground capitalize">{application.priority}</p>
                     </div>
                   </div>

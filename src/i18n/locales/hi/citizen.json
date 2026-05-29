@@ -1,0 +1,170 @@
+{
+  "dashboard": {
+    "welcome": "वापसी पर स्वागत है, {{name}}!",
+    "description": "सभी सरकारी सेवाएं एक ही जगह पर। शिकायत दर्ज करें, आवेदन ट्रैक करें, और अपडेट रहें।",
+    "overview": "अवलोकन",
+    "activeRequests": "सक्रिय अनुरोध",
+    "pendingApprovals": "लंबित अनुमोदन",
+    "resolvedIssues": "समाधान किए गए मुद्दे",
+    "urgentAlerts": "तत्काल सूचनाएं",
+    "quickAccess": "त्वरित सेवाएं",
+    "recentRequests": "हाल के अनुरोध",
+    "noRequests": "अभी तक कोई अनुरोध नहीं",
+    "noRequestsHint": "शुरू करने के लिए अपनी पहली शिकायत दर्ज करें",
+    "requestId": "अनुरोध आईडी",
+    "title": "शीर्षक",
+    "department": "विभाग",
+    "status": "स्थिति",
+    "notifications": "सूचनाएं",
+    "noNotifications": "कोई सूचना नहीं"
+  },
+  "services": {
+    "electricity": "बिजली",
+    "electricityDesc": "नए कनेक्शन, बिल भुगतान, और शिकायतें",
+    "water": "जल आपूर्ति",
+    "waterDesc": "जल कनेक्शन और गुणवत्ता शिकायतें",
+    "gas": "गैस सेवाएं",
+    "gasDesc": "गैस कनेक्शन और सुरक्षा मुद्दे",
+    "waste": "कचरा प्रबंधन",
+    "wasteDesc": "संग्रहण कार्यक्रम और शिकायतें"
+  },
+  "time": {
+    "justNow": "अभी",
+    "hoursAgo_one": "{{count}} घंटा पहले",
+    "hoursAgo_other": "{{count}} घंटे पहले",
+    "daysAgo_one": "{{count}} दिन पहले",
+    "daysAgo_other": "{{count}} दिन पहले"
+  },
+  "submit": {
+    "heading": "शिकायत दर्ज करें",
+    "description": "अपनी शिकायत या सेवा अनुरोध दर्ज करने के लिए नीचे विवरण भरें।",
+    "steps": {
+      "department": "विभाग",
+      "details": "विवरण",
+      "location": "स्थान और प्राथमिकता",
+      "documents": "दस्तावेज़",
+      "review": "समीक्षा"
+    },
+    "selectDepartment": "विभाग चुनें",
+    "selectCategory": "श्रेणी चुनें",
+    "form": {
+      "title": "शिकायत शीर्षक",
+      "titlePlaceholder": "अपनी शिकायत का संक्षिप्त शीर्षक",
+      "description": "विवरण",
+      "descriptionPlaceholder": "अपनी समस्या का विस्तार से वर्णन करें...",
+      "contactName": "संपर्क नाम",
+      "contactNamePlaceholder": "आपका पूरा नाम",
+      "phone": "फोन नंबर",
+      "phonePlaceholder": "+91 XXXXX XXXXX",
+      "email": "ईमेल पता",
+      "emailPlaceholder": "you@example.com",
+      "location": "स्थान / पता",
+      "locationPlaceholder": "समस्या का पूरा पता या लैंडमार्क दर्ज करें"
+    },
+    "priority": {
+      "heading": "प्राथमिकता स्तर",
+      "low": "कम",
+      "lowDesc": "गैर-तत्काल, सामान्य पूछताछ",
+      "medium": "मध्यम",
+      "mediumDesc": "एक सप्ताह के भीतर ध्यान देने की आवश्यकता",
+      "high": "उच्च",
+      "highDesc": "तत्काल, तुरंत कार्रवाई आवश्यक"
+    },
+    "upload": {
+      "heading": "दस्तावेज़ अपलोड करें",
+      "description": "फोटो, बिल, या कोई सहायक दस्तावेज़ संलग्न करें (वैकल्पिक)।",
+      "clickToUpload": "अपलोड करने के लिए क्लिक करें या ड्रैग एंड ड्रॉप करें",
+      "fileTypes": "PDF, PNG, JPG प्रत्येक 10MB तक",
+      "filesSelected": "{{count}} फ़ाइल चयनित",
+      "noFiles": "अभी तक कोई फ़ाइल अपलोड नहीं हुई। आवश्यक न हो तो इस चरण को छोड़ सकते हैं।"
+    },
+    "review": {
+      "heading": "अपनी शिकायत की समीक्षा करें",
+      "description": "कृपया जमा करने से पहले नीचे दिए गए विवरण सत्यापित करें।",
+      "department": "विभाग",
+      "category": "श्रेणी",
+      "title": "शीर्षक",
+      "descriptionLabel": "विवरण",
+      "location": "स्थान",
+      "priority": "प्राथमिकता",
+      "contact": "संपर्क",
+      "attachments": "संलग्नक"
+    },
+    "back": "पीछे",
+    "next": "आगे",
+    "submitting": "जमा हो रहा है...",
+    "submitButton": "शिकायत दर्ज करें",
+    "success": {
+      "heading": "शिकायत सफलतापूर्वक दर्ज हुई",
+      "message": "आपकी शिकायत दर्ज हो गई है। नीचे दिए गए टिकट आईडी से इसकी प्रगति ट्रैक करें।",
+      "ticketId": "टिकट आईडी",
+      "trackButton": "आवेदन ट्रैक करें",
+      "submitAnother": "एक और दर्ज करें"
+    }
+  },
+  "tracking": {
+    "heading": "आवेदन ट्रैक करें",
+    "description": "अपने आवेदन की वर्तमान स्थिति और समयरेखा देखने के लिए अपना टिकट आईडी दर्ज करें।",
+    "placeholder": "टिकट आईडी दर्ज करें (जैसे, TKT-XXXXXX)",
+    "search": "खोजें",
+    "searching": "खोज रहे हैं...",
+    "notFound": "इस टिकट आईडी से कोई आवेदन नहीं मिला। कृपया जांचें और पुनः प्रयास करें।",
+    "emptyState": "आवेदन विवरण देखने के लिए ऊपर टिकट आईडी दर्ज करें",
+    "emptyHint": "आपका टिकट आईडी पुष्टि ईमेल या SMS में मिलेगा",
+    "submitted": "जमा किया गया",
+    "slaDeadline": "SLA समय सीमा",
+    "daysRemaining": "शेष दिन",
+    "completed": "पूर्ण",
+    "overdue": "विलंबित",
+    "days": "दिन",
+    "timeline": "स्थिति समयरेखा",
+    "noUpdates": "अभी तक कोई स्थिति अपडेट नहीं।",
+    "assignedOfficer": "नियुक्त अधिकारी",
+    "notAssigned": "अभी तक नियुक्त नहीं",
+    "details": "विवरण",
+    "department": "विभाग",
+    "priority": "प्राथमिकता",
+    "downloadReceipt": "रसीद डाउनलोड करें",
+    "current": "वर्तमान"
+  },
+  "categories": {
+    "ELEC": {
+      "new_connection": "नया कनेक्शन",
+      "disconnection": "विच्छेदन",
+      "billing_issue": "बिलिंग समस्या",
+      "power_outage": "बिजली कटौती",
+      "street_light": "स्ट्रीट लाइट",
+      "meter_fault": "मीटर खराबी"
+    },
+    "WATER": {
+      "new_connection": "नया कनेक्शन",
+      "low_pressure": "कम दबाव",
+      "contamination": "दूषण",
+      "leakage": "रिसाव",
+      "billing_issue": "बिलिंग समस्या",
+      "no_supply": "आपूर्ति नहीं"
+    },
+    "GAS": {
+      "new_connection": "नया कनेक्शन",
+      "gas_leak": "गैस रिसाव",
+      "meter_issue": "मीटर समस्या",
+      "billing_issue": "बिलिंग समस्या",
+      "transfer": "स्थानांतरण",
+      "safety_concern": "सुरक्षा चिंता"
+    },
+    "WASTE": {
+      "missed_collection": "छूटा संग्रहण",
+      "illegal_dumping": "अवैध डंपिंग",
+      "bin_replacement": "बिन बदलना",
+      "schedule_change": "कार्यक्रम परिवर्तन",
+      "hazardous_waste": "खतरनाक कचरा"
+    },
+    "MUNI": {
+      "road_repair": "सड़क मरम्मत",
+      "drainage_block": "नाली अवरोध",
+      "footpath_damage": "फुटपाथ क्षति",
+      "public_toilet": "सार्वजनिक शौचालय",
+      "park_maintenance": "पार्क रखरखाव"
+    }
+  }
+}

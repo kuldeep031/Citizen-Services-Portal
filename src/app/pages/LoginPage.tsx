@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router';
 import { useAuth } from '../../auth';
 import { LayoutDashboard, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { UserRole } from '../../auth';
 
 export function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(['public', 'common']);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -53,7 +55,7 @@ export function LoginPage() {
           </div>
           <div>
             <p className="text-[15px] font-semibold text-primary-foreground">Citizen Services Portal</p>
-            <p className="text-[11px] text-primary-foreground/60">Government of Country</p>
+            <p className="text-[11px] text-primary-foreground/60">{t('login.governmentOf')}</p>
           </div>
         </Link>
 
@@ -81,13 +83,13 @@ export function LoginPage() {
             </div>
             <div>
               <p className="text-[15px] font-semibold text-foreground">Citizen Services Portal</p>
-              <p className="text-[11px] text-muted-foreground">Government of Country</p>
+              <p className="text-[11px] text-muted-foreground">{t('login.governmentOf')}</p>
             </div>
           </Link>
 
           <div className="mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Sign in to your account</h2>
-            <p className="text-[15px] text-muted-foreground">Enter your credentials to access the portal</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{t('login.title')}</h2>
+            <p className="text-[15px] text-muted-foreground">{t('login.emailPlaceholder')}</p>
           </div>
 
           {/* Error Alert */}
@@ -101,7 +103,7 @@ export function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Email Address
+                {t('login.email')}
               </label>
               <input
                 id="email"
@@ -117,7 +119,7 @@ export function LoginPage() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Password
+                {t('login.password')}
               </label>
               <div className="relative">
                 <input
@@ -146,14 +148,14 @@ export function LoginPage() {
               disabled={isLoading}
               className="w-full min-h-[48px] px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? t('login.signingIn') : t('login.submitButton')}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Don't have an account?{' '}
+            {t('login.noAccount')}{' '}
             <Link to="/register" className="text-primary font-medium hover:underline">
-              Register
+              {t('login.registerLink')}
             </Link>
           </p>
         </div>

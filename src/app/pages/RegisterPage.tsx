@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../../auth';
 import { LayoutDashboard, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { api, ApiError } from '../../lib/api';
 
 export function RegisterPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation(['public', 'common']);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -58,7 +60,7 @@ export function RegisterPage() {
           </div>
           <div>
             <p className="text-[15px] font-semibold text-primary-foreground">Citizen Services Portal</p>
-            <p className="text-[11px] text-primary-foreground/60">Government of Country</p>
+            <p className="text-[11px] text-primary-foreground/60">{t('register.governmentOf')}</p>
           </div>
         </div>
 
@@ -86,13 +88,13 @@ export function RegisterPage() {
             </div>
             <div>
               <p className="text-[15px] font-semibold text-foreground">Citizen Services Portal</p>
-              <p className="text-[11px] text-muted-foreground">Government of Country</p>
+              <p className="text-[11px] text-muted-foreground">{t('register.governmentOf')}</p>
             </div>
           </div>
 
           <div className="mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Create your account</h2>
-            <p className="text-[15px] text-muted-foreground">Fill in your details to register as a citizen</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{t('register.title')}</h2>
+            <p className="text-[15px] text-muted-foreground">{t('register.namePlaceholder')}</p>
           </div>
 
           {/* Error Alert */}
@@ -106,7 +108,7 @@ export function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Full Name
+                {t('register.name')}
               </label>
               <input
                 id="name"
@@ -122,7 +124,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-email" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Email Address
+                {t('register.email')}
               </label>
               <input
                 id="reg-email"
@@ -138,7 +140,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-phone" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Phone Number <span className="text-muted-foreground font-normal">(optional)</span>
+                {t('register.phone')} <span className="text-muted-foreground font-normal">(optional)</span>
               </label>
               <input
                 id="reg-phone"
@@ -153,7 +155,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-password" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Password
+                {t('register.password')}
               </label>
               <div className="relative">
                 <input
@@ -180,7 +182,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-confirm" className="block text-sm font-medium text-card-foreground mb-1.5">
-                Confirm Password
+                {t('register.confirmPassword')}
               </label>
               <input
                 id="reg-confirm"
@@ -199,14 +201,14 @@ export function RegisterPage() {
               disabled={isLoading}
               className="w-full min-h-[48px] px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Creating account...' : 'Create Account'}
+              {isLoading ? t('register.creating') : t('register.submitButton')}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
+            {t('register.hasAccount')}{' '}
             <Link to="/login" className="text-primary font-medium hover:underline">
-              Sign in
+              {t('register.loginLink')}
             </Link>
           </p>
         </div>

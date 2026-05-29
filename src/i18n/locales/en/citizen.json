@@ -1,0 +1,170 @@
+{
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}!",
+    "description": "Access all government services in one place. Submit complaints, track applications, and stay updated.",
+    "overview": "Overview",
+    "activeRequests": "Active Requests",
+    "pendingApprovals": "Pending Approvals",
+    "resolvedIssues": "Resolved Issues",
+    "urgentAlerts": "Urgent Alerts",
+    "quickAccess": "Quick Access Services",
+    "recentRequests": "Recent Requests",
+    "noRequests": "No requests yet",
+    "noRequestsHint": "Submit your first complaint to get started",
+    "requestId": "Request ID",
+    "title": "Title",
+    "department": "Department",
+    "status": "Status",
+    "notifications": "Notifications",
+    "noNotifications": "No notifications"
+  },
+  "services": {
+    "electricity": "Electricity",
+    "electricityDesc": "New connections, bill payments, and complaints",
+    "water": "Water Supply",
+    "waterDesc": "Water connections and quality complaints",
+    "gas": "Gas Services",
+    "gasDesc": "Gas connections and safety issues",
+    "waste": "Waste Management",
+    "wasteDesc": "Collection schedules and complaints"
+  },
+  "time": {
+    "justNow": "Just now",
+    "hoursAgo_one": "{{count}} hour ago",
+    "hoursAgo_other": "{{count}} hours ago",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago"
+  },
+  "submit": {
+    "heading": "Submit a Complaint",
+    "description": "Fill in the details below to register your complaint or service request.",
+    "steps": {
+      "department": "Department",
+      "details": "Details",
+      "location": "Location & Priority",
+      "documents": "Documents",
+      "review": "Review"
+    },
+    "selectDepartment": "Select Department",
+    "selectCategory": "Select Category",
+    "form": {
+      "title": "Complaint Title",
+      "titlePlaceholder": "Brief title for your complaint",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your issue in detail...",
+      "contactName": "Contact Name",
+      "contactNamePlaceholder": "Your full name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+91 XXXXX XXXXX",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "location": "Location / Address",
+      "locationPlaceholder": "Enter the full address or landmark where the issue is located"
+    },
+    "priority": {
+      "heading": "Priority Level",
+      "low": "Low",
+      "lowDesc": "Non-urgent, general inquiry",
+      "medium": "Medium",
+      "mediumDesc": "Needs attention within a week",
+      "high": "High",
+      "highDesc": "Urgent, needs immediate action"
+    },
+    "upload": {
+      "heading": "Upload Documents",
+      "description": "Attach photos, bills, or any supporting documents (optional).",
+      "clickToUpload": "Click to upload or drag and drop",
+      "fileTypes": "PDF, PNG, JPG up to 10MB each",
+      "filesSelected": "{{count}} file(s) selected",
+      "noFiles": "No files uploaded yet. You can skip this step if not needed."
+    },
+    "review": {
+      "heading": "Review Your Complaint",
+      "description": "Please verify the details below before submitting.",
+      "department": "Department",
+      "category": "Category",
+      "title": "Title",
+      "descriptionLabel": "Description",
+      "location": "Location",
+      "priority": "Priority",
+      "contact": "Contact",
+      "attachments": "Attachments"
+    },
+    "back": "Back",
+    "next": "Next",
+    "submitting": "Submitting...",
+    "submitButton": "Submit Complaint",
+    "success": {
+      "heading": "Complaint Submitted Successfully",
+      "message": "Your complaint has been registered. Track its progress using the ticket ID below.",
+      "ticketId": "Ticket ID",
+      "trackButton": "Track Application",
+      "submitAnother": "Submit Another"
+    }
+  },
+  "tracking": {
+    "heading": "Track Application",
+    "description": "Enter your ticket ID to view the current status and timeline of your application.",
+    "placeholder": "Enter Ticket ID (e.g., TKT-XXXXXX)",
+    "search": "Search",
+    "searching": "Searching...",
+    "notFound": "No application found with that ticket ID. Please check and try again.",
+    "emptyState": "Enter a ticket ID above to view application details",
+    "emptyHint": "You can find your ticket ID in the confirmation email or SMS",
+    "submitted": "Submitted",
+    "slaDeadline": "SLA Deadline",
+    "daysRemaining": "Days Remaining",
+    "completed": "Completed",
+    "overdue": "Overdue",
+    "days": "days",
+    "timeline": "Status Timeline",
+    "noUpdates": "No status updates yet.",
+    "assignedOfficer": "Assigned Officer",
+    "notAssigned": "Not yet assigned",
+    "details": "Details",
+    "department": "Department",
+    "priority": "Priority",
+    "downloadReceipt": "Download Receipt",
+    "current": "Current"
+  },
+  "categories": {
+    "ELEC": {
+      "new_connection": "New Connection",
+      "disconnection": "Disconnection",
+      "billing_issue": "Billing Issue",
+      "power_outage": "Power Outage",
+      "street_light": "Street Light",
+      "meter_fault": "Meter Fault"
+    },
+    "WATER": {
+      "new_connection": "New Connection",
+      "low_pressure": "Low Pressure",
+      "contamination": "Contamination",
+      "leakage": "Leakage",
+      "billing_issue": "Billing Issue",
+      "no_supply": "No Supply"
+    },
+    "GAS": {
+      "new_connection": "New Connection",
+      "gas_leak": "Gas Leak",
+      "meter_issue": "Meter Issue",
+      "billing_issue": "Billing Issue",
+      "transfer": "Transfer",
+      "safety_concern": "Safety Concern"
+    },
+    "WASTE": {
+      "missed_collection": "Missed Collection",
+      "illegal_dumping": "Illegal Dumping",
+      "bin_replacement": "Bin Replacement",
+      "schedule_change": "Schedule Change",
+      "hazardous_waste": "Hazardous Waste"
+    },
+    "MUNI": {
+      "road_repair": "Road Repair",
+      "drainage_block": "Drainage Block",
+      "footpath_damage": "Footpath Damage",
+      "public_toilet": "Public Toilet",
+      "park_maintenance": "Park Maintenance"
+    }
+  }
+}
