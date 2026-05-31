@@ -106,7 +106,7 @@ export function CitizenDashboard() {
         onClick={(e) => { e.preventDefault(); document.getElementById('requests-heading')?.scrollIntoView({ behavior: 'smooth' }); }}
         className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
       >
-        View all your requests &darr;
+        Click here to view all your requests &darr;
       </a>
 
       {/* Overview Stats */}
