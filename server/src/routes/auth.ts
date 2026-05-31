@@ -258,10 +258,12 @@ router.post('/google', async (req: Request, res: Response, next: NextFunction) =
     let user = await prisma.user.findUnique({ where: { email: googleEmail } });
 
     if (!user) {
+      const randomHash = await bcrypt.hash(crypto.randomBytes(20).toString('hex'), 12);
       user = await prisma.user.create({
         data: {
           name: googleName,
           email: googleEmail,
+          passwordHash: randomHash,
           role: 'citizen',
         },
       });
