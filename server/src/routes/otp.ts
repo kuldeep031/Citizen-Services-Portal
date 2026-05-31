@@ -39,7 +39,12 @@ router.post('/send-email', async (req: Request, res: Response, next: NextFunctio
       expiresAt: Date.now() + 10 * 60 * 1000,
     });
 
-    await sendOTPEmail(email, otp);
+    try {
+      await sendOTPEmail(email, otp);
+    } catch {
+      return res.status(503).json({ error: 'Email service temporarily unavailable. Please try again in a moment.' });
+    }
+
     res.json({ message: 'OTP sent to email' });
   } catch (err) {
     next(err);
