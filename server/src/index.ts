@@ -5,6 +5,7 @@ import { config } from './config/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { prisma } from './config/database.js';
 import authRoutes from './routes/auth.js';
+import otpRoutes from './routes/otp.js';
 import complaintRoutes from './routes/complaints.js';
 import trackingRoutes from './routes/tracking.js';
 import notificationRoutes from './routes/notifications.js';
@@ -25,6 +26,7 @@ app.use('/uploads', express.static(config.upload.dir));
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/otp', otpRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/tracking', trackingRoutes);
 app.use('/api/notifications', notificationRoutes);

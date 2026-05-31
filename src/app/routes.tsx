@@ -6,6 +6,8 @@ import { PublicOnlyRoute } from './components/PublicOnlyRoute';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ChangePasswordPage } from './pages/ChangePasswordPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { CitizenDashboard } from './pages/CitizenDashboard';
 import { ComplaintSubmission } from './pages/ComplaintSubmission';
 import { ApplicationTracking } from './pages/ApplicationTracking';
@@ -49,6 +51,10 @@ export const router = createBrowserRouter([
       </PublicOnlyRoute>
     ),
   },
+  {
+    path: '/change-password',
+    element: <ChangePasswordPage />,
+  },
 
   // Citizen protected routes
   {
@@ -62,6 +68,7 @@ export const router = createBrowserRouter([
       { index: true, element: <CitizenDashboard /> },
       { path: 'submit-complaint', element: <ComplaintSubmission /> },
       { path: 'track-application', element: <ApplicationTracking /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
 
@@ -75,6 +82,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <OfficerDashboard /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
 
@@ -89,6 +97,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: 'complaints', element: <AdminComplaints /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
 

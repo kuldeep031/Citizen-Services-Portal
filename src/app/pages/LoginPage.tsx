@@ -3,10 +3,12 @@ import { useNavigate, useLocation, Link } from 'react-router';
 import { useAuth } from '../../auth';
 import { LayoutDashboard, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { api, ApiError } from '../../lib/api';
+import { GoogleLoginButton } from '../components/GoogleLoginButton';
 import type { UserRole } from '../../auth';
 
 export function LoginPage() {
-  const { login } = useAuth();
+  const { login, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(['public', 'common']);
@@ -41,6 +43,22 @@ export function LoginPage() {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (data: { idToken: string; name: string; email: string }) => {
+    setError('');
+    try {
+      const res = await api.post<{ user: any; tokens: any }>('auth/google', { idToken: data.idToken });
+      setAuth(res.user, res.tokens);
+      const role = res.user.role as UserRole;
+      navigate(from || roleRedirects[role], { replace: true });
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError('Google sign-in failed');
+      }
     }
   };
 
@@ -87,9 +105,17 @@ export function LoginPage() {
             </div>
           </Link>
 
-          <div className="mb-8">
+          <div className="mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{t('login.title')}</h2>
-            <p className="text-[15px] text-muted-foreground">{t('login.emailPlaceholder')}</p>
+            <p className="text-[15px] text-muted-foreground">Sign in with your email or Google account</p>
+          </div>
+
+          {/* Google Login */}
+          <GoogleLoginButton onSuccess={handleGoogleSuccess} />
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
+            <div className="relative flex justify-center text-xs"><span className="bg-background px-3 text-muted-foreground">or continue with email</span></div>
           </div>
 
           {/* Error Alert */}
@@ -140,6 +166,11 @@ export function LoginPage() {
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
+              </div>
+              <div className="flex justify-end mt-1.5">
+                <Link to="/change-password" className="text-[13px] text-primary font-medium hover:underline">
+                  Forgot Password?
+                </Link>
               </div>
             </div>
 

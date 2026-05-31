@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   LogOut,
+  KeyRound,
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -190,7 +191,11 @@ export function DashboardLayout() {
 
           {/* User Profile + Logout */}
           <div className="px-3 py-4 border-t border-sidebar-border space-y-2">
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
+            <Link
+              to={`/${user.role}/profile`}
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-sidebar-accent/50 transition-colors"
+            >
               <div className="w-9 h-9 bg-sidebar-primary/80 rounded-full flex items-center justify-center flex-shrink-0">
                 <User className="w-4 h-4 text-sidebar-primary-foreground" aria-hidden="true" />
               </div>
@@ -198,7 +203,15 @@ export function DashboardLayout() {
                 <p className="text-sm font-medium text-sidebar-foreground truncate">{user.name}</p>
                 <p className="text-[11px] text-sidebar-foreground/60 truncate">{user.email}</p>
               </div>
-            </div>
+            </Link>
+            <Link
+              to="/change-password"
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center gap-3 w-full px-3 py-2.5 min-h-[44px] rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"
+            >
+              <KeyRound className="w-4 h-4" aria-hidden="true" />
+              <span className="text-sm">Change Password</span>
+            </Link>
             <button
               onClick={handleLogout}
               className="flex items-center gap-3 w-full px-3 py-2.5 min-h-[44px] rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"

@@ -4,6 +4,7 @@ import { api, ApiError } from '../lib/api';
 
 interface AuthContextValue extends AuthState {
   login: (credentials: LoginCredentials) => Promise<void>;
+  setAuth: (userData: any, tokenData: any) => void;
   logout: () => void;
   hasRole: (role: UserRole | UserRole[]) => boolean;
 }
@@ -86,6 +87,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const setAuth = useCallback((userData: any, tokenData: any) => {
+    const user: User = {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      role: userData.role,
+      department: userData.department,
+      phone: userData.phone,
+    };
+
+    const tokens: AuthTokens = {
+      accessToken: tokenData.accessToken,
+      refreshToken: tokenData.refreshToken,
+      expiresAt: Date.now() + (tokenData.expiresIn || 900) * 1000,
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ user, tokens }));
+    setState({ user, tokens, isAuthenticated: true, isLoading: false });
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -106,7 +127,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [state.user]);
 
   return (
-    <AuthContext.Provider value={{ ...state, login, logout, hasRole }}>
+    <AuthContext.Provider value={{ ...state, login, setAuth, logout, hasRole }}>
       {children}
     </AuthContext.Provider>
   );

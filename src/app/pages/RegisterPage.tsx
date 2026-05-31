@@ -4,6 +4,7 @@ import { useAuth } from '../../auth';
 import { LayoutDashboard, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { api, ApiError } from '../../lib/api';
+import { EmailOTPInput } from '../components/EmailOTPInput';
 
 export function RegisterPage() {
   const { login } = useAuth();
@@ -18,10 +19,16 @@ export function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [emailToken, setEmailToken] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!emailToken) {
+      setError('Please verify your email first');
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -36,7 +43,13 @@ export function RegisterPage() {
     setIsLoading(true);
 
     try {
-      await api.post('auth/register', { name, email, password, phone: phone || undefined });
+      await api.post('auth/register', {
+        name,
+        email,
+        password,
+        phone: phone || undefined,
+        emailVerificationToken: emailToken,
+      });
       await login({ email, password });
       navigate('/citizen', { replace: true });
     } catch (err) {
@@ -54,7 +67,7 @@ export function RegisterPage() {
     <div className="min-h-screen bg-background flex">
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary to-primary/90 p-12 flex-col justify-between">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
             <LayoutDashboard className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
           </div>
@@ -62,7 +75,7 @@ export function RegisterPage() {
             <p className="text-[15px] font-semibold text-primary-foreground">Citizen Services Portal</p>
             <p className="text-[11px] text-primary-foreground/60">{t('register.governmentOf')}</p>
           </div>
-        </div>
+        </Link>
 
         <div>
           <h1 className="text-3xl font-bold text-primary-foreground mb-4 leading-tight">
@@ -82,7 +95,7 @@ export function RegisterPage() {
       <div className="flex-1 flex items-center justify-center p-4 sm:p-8">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center gap-3 mb-8">
+          <Link to="/" className="lg:hidden flex items-center gap-3 mb-8">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <LayoutDashboard className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
             </div>
@@ -90,11 +103,11 @@ export function RegisterPage() {
               <p className="text-[15px] font-semibold text-foreground">Citizen Services Portal</p>
               <p className="text-[11px] text-muted-foreground">{t('register.governmentOf')}</p>
             </div>
-          </div>
+          </Link>
 
-          <div className="mb-8">
+          <div className="mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{t('register.title')}</h2>
-            <p className="text-[15px] text-muted-foreground">{t('register.namePlaceholder')}</p>
+            <p className="text-[15px] text-muted-foreground">Fill in your details to register as a citizen</p>
           </div>
 
           {/* Error Alert */}
@@ -108,7 +121,7 @@ export function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-1.5">
-                {t('register.name')}
+                Full Name <span className="text-destructive">*</span>
               </label>
               <input
                 id="name"
@@ -124,7 +137,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-email" className="block text-sm font-medium text-card-foreground mb-1.5">
-                {t('register.email')}
+                Email Address <span className="text-destructive">*</span>
               </label>
               <input
                 id="reg-email"
@@ -134,28 +147,33 @@ export function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                disabled={!!emailToken}
+                className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent disabled:opacity-60"
               />
+              <div className="mt-2">
+                <EmailOTPInput email={email} onVerified={setEmailToken} disabled={!email} />
+              </div>
             </div>
 
             <div>
               <label htmlFor="reg-phone" className="block text-sm font-medium text-card-foreground mb-1.5">
-                {t('register.phone')} <span className="text-muted-foreground font-normal">(optional)</span>
+                Phone Number <span className="text-destructive">*</span>
               </label>
               <input
                 id="reg-phone"
                 type="tel"
+                required
                 autoComplete="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Your phone number"
+                placeholder="+91 XXXXX XXXXX"
                 className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
               />
             </div>
 
             <div>
               <label htmlFor="reg-password" className="block text-sm font-medium text-card-foreground mb-1.5">
-                {t('register.password')}
+                Password <span className="text-destructive">*</span>
               </label>
               <div className="relative">
                 <input
@@ -182,7 +200,7 @@ export function RegisterPage() {
 
             <div>
               <label htmlFor="reg-confirm" className="block text-sm font-medium text-card-foreground mb-1.5">
-                {t('register.confirmPassword')}
+                Confirm Password <span className="text-destructive">*</span>
               </label>
               <input
                 id="reg-confirm"
@@ -198,10 +216,10 @@ export function RegisterPage() {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !emailToken}
               className="w-full min-h-[48px] px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? t('register.creating') : t('register.submitButton')}
+              {isLoading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
 
