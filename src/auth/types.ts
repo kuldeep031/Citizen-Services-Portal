@@ -7,7 +7,7 @@ export interface User {
   role: UserRole;
   department?: string;
   phone?: string;
-  avatar?: string;
+  mustChangePassword?: boolean;
 }
 
 export interface AuthTokens {

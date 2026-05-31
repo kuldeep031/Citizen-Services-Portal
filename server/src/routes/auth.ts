@@ -122,6 +122,7 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction) =>
         role: user.role,
         department: user.departmentId,
         phone: user.phone,
+        mustChangePassword: user.mustChangePassword,
       },
       tokens: {
         accessToken,
@@ -271,6 +272,10 @@ router.post('/google', async (req: Request, res: Response, next: NextFunction) =
 
     if (!user.isActive) {
       throw new AppError(401, 'Account is deactivated');
+    }
+
+    if (user.mustChangePassword) {
+      throw new AppError(403, 'This is your first login. Please use the temporary password sent to your email to log in and change your password.');
     }
 
     const tokenPayload: AuthPayload = {

@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(async (credentials: LoginCredentials) => {
     try {
       const data = await api.post<{
-        user: { id: string; name: string; email: string; role: UserRole; department?: string; phone?: string };
+        user: { id: string; name: string; email: string; role: UserRole; department?: string; phone?: string; mustChangePassword?: boolean };
         tokens: { accessToken: string; refreshToken: string; expiresIn: number };
       }>('auth/login', credentials);
 
@@ -62,6 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         role: data.user.role,
         department: data.user.department,
         phone: data.user.phone,
+        mustChangePassword: data.user.mustChangePassword,
       };
 
       const tokens: AuthTokens = {

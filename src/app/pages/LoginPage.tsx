@@ -37,7 +37,11 @@ export function LoginPage() {
       const storedAuth = localStorage.getItem('citizen_portal_auth');
       if (storedAuth) {
         const { user } = JSON.parse(storedAuth);
-        navigate(from || roleRedirects[user.role as UserRole], { replace: true });
+        if (user.mustChangePassword) {
+          navigate('/change-password', { replace: true });
+        } else {
+          navigate(from || roleRedirects[user.role as UserRole], { replace: true });
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');

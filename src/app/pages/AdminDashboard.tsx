@@ -6,6 +6,7 @@ import {
   LineChart, Line, PieChart, Pie, Cell, Legend,
 } from 'recharts';
 import { api } from '../../lib/api';
+import { EmailOTPInput } from '../components/EmailOTPInput';
 
 interface AdminStats {
   totalComplaints: number;
@@ -63,8 +64,9 @@ export function AdminDashboard() {
   const [showAlumni, setShowAlumni] = useState(false);
   const [alumniOfficers, setAlumniOfficers] = useState<OfficerStat[]>([]);
   const [deptOptions, setDeptOptions] = useState<DepartmentOption[]>([]);
-  const [officerForm, setOfficerForm] = useState({ name: '', email: '', password: '', phone: '', departmentId: '' });
+  const [officerForm, setOfficerForm] = useState({ name: '', email: '', phone: '', departmentId: '' });
   const [creating, setCreating] = useState(false);
+  const [emailToken, setEmailToken] = useState('');
   const [createError, setCreateError] = useState('');
   const [createSuccess, setCreateSuccess] = useState('');
 
@@ -137,14 +139,19 @@ export function AdminDashboard() {
 
   const handleCreateOfficer = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!emailToken) {
+      setCreateError('Please verify the officer email first');
+      return;
+    }
     setCreating(true);
     setCreateError('');
     setCreateSuccess('');
 
     try {
-      const res = await api.post<{ officer: { name: string; email: string } }>('admin/officers', officerForm);
-      setCreateSuccess(`Officer "${res.officer.name}" created successfully.`);
-      setOfficerForm({ name: '', email: '', password: '', phone: '', departmentId: '' });
+      const res = await api.post<{ officer: { name: string; email: string } }>('admin/officers', { ...officerForm, emailVerificationToken: emailToken });
+      setCreateSuccess(`Officer "${res.officer.name}" created successfully. Temporary password sent to their email.`);
+      setOfficerForm({ name: '', email: '', phone: '', departmentId: '' });
+      setEmailToken('');
       fetchAll();
     } catch (err) {
       setCreateError(err instanceof Error ? err.message : 'Failed to create officer');
@@ -395,29 +402,18 @@ export function AdminDashboard() {
                   type="email"
                   required
                   value={officerForm.email}
-                  onChange={(e) => setOfficerForm({ ...officerForm, email: e.target.value })}
-                  className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                  onChange={(e) => { setOfficerForm({ ...officerForm, email: e.target.value }); setEmailToken(''); }}
+                  disabled={!!emailToken}
+                  className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent disabled:opacity-60"
                   placeholder="officer@email.com"
                 />
               </div>
               <div>
-                <label htmlFor="officer-password" className="block text-[12px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Password</label>
-                <input
-                  id="officer-password"
-                  type="password"
-                  required
-                  minLength={8}
-                  value={officerForm.password}
-                  onChange={(e) => setOfficerForm({ ...officerForm, password: e.target.value })}
-                  className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
-                  placeholder="Min 8 characters"
-                />
-              </div>
-              <div>
-                <label htmlFor="officer-phone" className="block text-[12px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Phone (optional)</label>
+                <label htmlFor="officer-phone" className="block text-[12px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Phone</label>
                 <input
                   id="officer-phone"
                   type="tel"
+                  required
                   value={officerForm.phone}
                   onChange={(e) => setOfficerForm({ ...officerForm, phone: e.target.value })}
                   className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
@@ -439,10 +435,18 @@ export function AdminDashboard() {
                   ))}
                 </select>
               </div>
+              <div>
+                <label className="block text-[12px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Verify Email</label>
+                <EmailOTPInput
+                  email={officerForm.email}
+                  onVerified={setEmailToken}
+                  disabled={!officerForm.name || !officerForm.email || !officerForm.phone || !officerForm.departmentId}
+                />
+              </div>
               <div className="flex items-end">
                 <button
                   type="submit"
-                  disabled={creating}
+                  disabled={creating || !emailToken}
                   className="flex items-center gap-2 min-h-[44px] px-5 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {creating ? <Loader2 className="w-4 h-4 animate-spin" /> : <UserPlus className="w-4 h-4" />}

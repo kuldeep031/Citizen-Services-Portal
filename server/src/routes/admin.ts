@@ -1,9 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 import { prisma } from '../config/database.js';
 import { authenticate, authorize } from '../middleware/auth.js';
 import { createOfficerSchema } from '../utils/validators.js';
 import { AppError, formatZodError } from '../utils/errors.js';
+import { validateEmailToken } from './otp.js';
+import { sendWelcomeOfficerEmail } from '../lib/mailer.js';
 
 const router = Router();
 
@@ -154,7 +157,12 @@ router.post('/officers', authenticate, authorize('admin'), async (req: Request, 
       throw new AppError(400, formatZodError(parsed.error));
     }
 
-    const { name, email, password, phone, departmentId } = parsed.data;
+    const { name, email, phone, departmentId, emailVerificationToken } = parsed.data;
+
+    const verifiedEmail = validateEmailToken(emailVerificationToken);
+    if (!verifiedEmail || verifiedEmail !== email.toLowerCase()) {
+      throw new AppError(400, 'Email verification failed or expired. Please verify again.');
+    }
 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
@@ -166,10 +174,16 @@ router.post('/officers', authenticate, authorize('admin'), async (req: Request, 
       throw new AppError(400, 'Invalid department');
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const tempPassword = `Off@${crypto.randomBytes(4).toString('hex')}${crypto.randomInt(10, 99)}`;
+    const passwordHash = await bcrypt.hash(tempPassword, 12);
+
     const officer = await prisma.user.create({
-      data: { name, email, passwordHash, phone, role: 'officer', departmentId },
+      data: { name, email, passwordHash, phone, role: 'officer', departmentId, mustChangePassword: true },
       include: { department: { select: { name: true } } },
+    });
+
+    sendWelcomeOfficerEmail(email, name, tempPassword).catch((err) => {
+      console.error('[Admin] Failed to send welcome email:', err.message);
     });
 
     res.status(201).json({

@@ -36,6 +36,7 @@ model User {
   phone        String?
   departmentId String?  @map("department_id")
   isActive     Boolean  @default(true) @map("is_active")
+  mustChangePassword Boolean @default(false) @map("must_change_password")
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
