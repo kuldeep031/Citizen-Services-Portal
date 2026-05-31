@@ -45,6 +45,17 @@ export function ChangePasswordPage() {
         emailVerificationToken: emailToken,
         newPassword,
       });
+
+      // Clear mustChangePassword from stored auth
+      const stored = localStorage.getItem('citizen_portal_auth');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.user) {
+          parsed.user.mustChangePassword = false;
+          localStorage.setItem('citizen_portal_auth', JSON.stringify(parsed));
+        }
+      }
+
       setSuccess(true);
     } catch (err) {
       if (err instanceof ApiError) {

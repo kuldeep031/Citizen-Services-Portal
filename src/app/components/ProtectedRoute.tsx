@@ -26,6 +26,10 @@ export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) 
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  if (user?.mustChangePassword) {
+    return <Navigate to="/change-password" replace />;
+  }
+
   if (user && !allowedRoles.includes(user.role)) {
     const roleRedirects: Record<UserRole, string> = {
       citizen: '/citizen',
