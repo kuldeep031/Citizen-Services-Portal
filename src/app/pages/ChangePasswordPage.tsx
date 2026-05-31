@@ -7,7 +7,7 @@ import { useAuth } from '../../auth';
 
 export function ChangePasswordPage() {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, setAuth } = useAuth();
 
   const [email, setEmail] = useState(user?.email || '');
   const [emailToken, setEmailToken] = useState('');
@@ -46,13 +46,14 @@ export function ChangePasswordPage() {
         newPassword,
       });
 
-      // Clear mustChangePassword from stored auth
+      // Clear mustChangePassword from stored auth and React state
       const stored = localStorage.getItem('citizen_portal_auth');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.user) {
           parsed.user.mustChangePassword = false;
           localStorage.setItem('citizen_portal_auth', JSON.stringify(parsed));
+          setAuth(parsed.user, parsed.tokens);
         }
       }
 
