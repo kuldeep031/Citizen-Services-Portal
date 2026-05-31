@@ -1,18 +1,19 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,
+  service: 'gmail',
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 export async function sendOTPEmail(to: string, otp: string) {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.log(`[Email OTP → ${to}] Code: ${otp}`);
+    console.log(`[Email OTP → ${to}] Code: ${otp} (SMTP not configured)`);
     return;
   }
 
@@ -29,12 +30,16 @@ export async function sendOTPEmail(to: string, otp: string) {
     </div>
   `;
 
-  await transporter.sendMail({
-    from: `"Citizen Services Portal" <${process.env.SMTP_USER}>`,
-    to,
-    subject: 'Your Verification Code',
-    html,
-  });
-
-  console.log(`[Email OTP → ${to}] Sent`);
+  try {
+    await transporter.sendMail({
+      from: `"Citizen Services Portal" <${process.env.SMTP_USER}>`,
+      to,
+      subject: 'Your Verification Code',
+      html,
+    });
+    console.log(`[Email OTP → ${to}] Sent successfully`);
+  } catch (err: any) {
+    console.error(`[Email OTP → ${to}] Failed:`, err.message);
+    throw new Error('Failed to send verification email. Please try again.');
+  }
 }
