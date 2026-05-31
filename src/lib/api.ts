@@ -76,7 +76,9 @@ class ApiClient {
       body: body instanceof FormData ? body : body ? JSON.stringify(body) : undefined,
     });
 
-    if (res.status === 401) {
+    const isAuthEndpoint = endpoint.startsWith('auth/login') || endpoint.startsWith('auth/register') || endpoint.startsWith('auth/google') || endpoint.startsWith('auth/change-password') || endpoint.startsWith('otp/');
+
+    if (res.status === 401 && !isAuthEndpoint) {
       const newToken = await this.refreshToken();
       if (newToken) {
         requestHeaders['Authorization'] = `Bearer ${newToken}`;
