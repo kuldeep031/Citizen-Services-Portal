@@ -17,7 +17,9 @@ import uploadRoutes from './routes/uploads.js';
 const app = express();
 
 app.use(cors({
-  origin: config.cors.origin,
+  origin: config.cors.origin.includes(',')
+    ? config.cors.origin.split(',').map(s => s.trim())
+    : config.cors.origin,
   credentials: true,
 }));
 app.use(express.json({ limit: '2mb' }));

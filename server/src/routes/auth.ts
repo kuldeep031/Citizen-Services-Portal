@@ -240,7 +240,14 @@ router.post('/google', async (req: Request, res: Response, next: NextFunction) =
       throw new AppError(400, 'Google ID token is required');
     }
 
-    const decoded = await verifyFirebaseToken(idToken);
+    let decoded;
+    try {
+      decoded = await verifyFirebaseToken(idToken);
+    } catch (err: any) {
+      console.error('[Google Auth] Token verification failed:', err.message);
+      throw new AppError(500, 'Google sign-in failed. Server configuration error.');
+    }
+
     const googleEmail = decoded.email;
     const googleName = decoded.name || decoded.email?.split('@')[0] || 'User';
 
