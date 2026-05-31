@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { CheckCircle, Upload, X, ArrowLeft, ArrowRight, Send, FileText, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../lib/api';
+import { useAuth } from '../../auth';
 
 interface Department {
   id: string;
@@ -34,6 +35,7 @@ interface FormData {
 
 export function ComplaintSubmission() {
   const { t } = useTranslation('citizen');
+  const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -279,18 +281,14 @@ export function ComplaintSubmission() {
               </label>
               <textarea id="description" required value={formData.description} onChange={(e) => updateField('description', e.target.value)} placeholder={t('submit.form.descriptionPlaceholder')} rows={4} className="w-full px-4 py-3 rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none" />
             </div>
-            <div>
-              <label htmlFor="contactName" className="block text-sm font-medium text-card-foreground mb-1.5">{t('submit.form.contactName')}</label>
-              <input id="contactName" type="text" value={formData.contactName} onChange={(e) => updateField('contactName', e.target.value)} placeholder={t('submit.form.contactNamePlaceholder')} className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent" />
-            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="contactPhone" className="block text-sm font-medium text-card-foreground mb-1.5">{t('submit.form.phone')}</label>
-                <input id="contactPhone" type="tel" value={formData.contactPhone} onChange={(e) => updateField('contactPhone', e.target.value)} placeholder={t('submit.form.phonePlaceholder')} className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent" />
+                <label htmlFor="contactName" className="block text-sm font-medium text-card-foreground mb-1.5">{t('submit.form.contactName')}</label>
+                <input id="contactName" type="text" value={user?.name || ''} disabled className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground focus:outline-none opacity-60 cursor-not-allowed" />
               </div>
               <div>
                 <label htmlFor="contactEmail" className="block text-sm font-medium text-card-foreground mb-1.5">{t('submit.form.email')}</label>
-                <input id="contactEmail" type="email" value={formData.contactEmail} onChange={(e) => updateField('contactEmail', e.target.value)} placeholder={t('submit.form.emailPlaceholder')} className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent" />
+                <input id="contactEmail" type="email" value={user?.email || ''} disabled className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-input bg-input-background text-foreground focus:outline-none opacity-60 cursor-not-allowed" />
               </div>
             </div>
           </fieldset>

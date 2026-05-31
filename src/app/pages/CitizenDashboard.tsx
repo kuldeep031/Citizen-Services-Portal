@@ -100,6 +100,15 @@ export function CitizenDashboard() {
         </p>
       </section>
 
+      {/* Quick Link */}
+      <a
+        href="#requests-heading"
+        onClick={(e) => { e.preventDefault(); document.getElementById('requests-heading')?.scrollIntoView({ behavior: 'smooth' }); }}
+        className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
+      >
+        View all your requests &darr;
+      </a>
+
       {/* Overview Stats */}
       <section aria-labelledby="overview-heading">
         <h2 id="overview-heading" className="mb-4">{t('dashboard.overview')}</h2>
