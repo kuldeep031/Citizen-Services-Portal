@@ -1,4 +1,8 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Force IPv4 — Render free tier doesn't support IPv6 outbound
+dns.setDefaultResultOrder('ipv4first');
 
 function createTransporter() {
   const user = process.env.SMTP_USER;
