@@ -83,7 +83,7 @@ export function PublicLayout() {
           </div>
           <div className="mt-8 pt-6 border-t border-border text-center">
             <p className="text-[12px] text-muted-foreground">
-              {t('public:footer.copyright')}
+              &copy; {new Date().getFullYear()} {t('public:footer.copyright')}
             </p>
           </div>
         </div>

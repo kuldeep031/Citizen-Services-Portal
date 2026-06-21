@@ -91,7 +91,7 @@ export function LoginPage() {
         </div>
 
         <p className="text-[12px] text-primary-foreground/40">
-          &copy; 2025 Unified Citizen Services Portal. Government of Country.
+          &copy; {new Date().getFullYear()} Unified Citizen Services Portal. Government of Country.
         </p>
       </div>
 
